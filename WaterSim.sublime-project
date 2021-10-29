@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "bin/.." 
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Debug",
+			"working_dir": "${project_path}",
+			"cmd": ["g++ -c src/*.cpp -std=c++14 -m64 -O3 -Wall -I include && g++ *.o -o bin/main -s -lSDL2main -lSDL2 && ./bin/main"],
+			"selector": "source.c++",
+			"shell": true
+		}
+	]
+}
