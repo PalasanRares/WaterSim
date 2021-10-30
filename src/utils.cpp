@@ -62,11 +62,11 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 	}
 }
 
-void drawWater(byte** matrix, int brushSize, const int x, const int y, const int width, const int height) {
+void drawElement(byte** matrix, int brushSize, const int x, const int y, const int width, const int height, const byte element) {
 	for (int i = x - brushSize; i < x + brushSize; i++) {
 		for (int j = y - brushSize; j < y + brushSize; j++) {
-			if (i >= 0 && i < width && j >= 0 && j < height) {
-				matrix[i][j] = 1;
+			if (i >= 0 && i < width && j >= 0 && j < height && matrix[i][j] == 0) {
+				matrix[i][j] = element;
 			}
 		}
 	}

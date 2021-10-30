@@ -8,10 +8,11 @@
 using namespace std;
 
 int main() {
-	const char* title = "WaterSim 0.2";
+	const char* title = "WaterSim 0.3";
 	const int width = 500;
 	const int height = 250;
 	int brushSize = 2;
+	byte element = 1; //1 - water, 2 - wood
 	RenderWindow* window = new RenderWindow(title, width, height);
 	bool running = true;
 
@@ -30,14 +31,29 @@ int main() {
 				case SDL_QUIT:
 					running = false;
 					break;
-				case SDL_MOUSEMOTION:
+				case SDL_KEYDOWN:
+					switch (event.key.keysym.sym) {
+						case SDLK_RIGHT:
+							if (brushSize < 6) {
+								brushSize += 2;
+							}
+							break;
+						case SDLK_LEFT:
+							if (brushSize > 2) {
+								brushSize -= 2;
+							}
+							break;
+						case SDLK_UP:
+							element = element % 2 + 1;
+							break;
+					}
 					break;
 			}
 		}
 
 		uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
 		if (buttons & SDL_BUTTON(1)) {
-			drawWater(screenMatrix, brushSize, xMouse, yMouse, width, height);
+			drawElement(screenMatrix, brushSize, xMouse, yMouse, width, height, element);
 		}
 
 		window->clear();

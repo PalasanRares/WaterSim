@@ -28,11 +28,17 @@ void RenderWindow::display() {
 }
 
 void RenderWindow::renderMatrix(byte** matrix, const int width, const int height) {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
-			if (matrix[i][j] != 0) {
-				SDL_RenderDrawPoint(renderer, i, j);
+			switch(matrix[i][j]) {
+				case 1:
+					SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+					SDL_RenderDrawPoint(renderer, i, j);
+					break;
+				case 2:
+					SDL_SetRenderDrawColor(renderer, 59, 42, 5, 255);
+					SDL_RenderDrawPoint(renderer, i, j);
+					break;
 			}
 		}
 	}
