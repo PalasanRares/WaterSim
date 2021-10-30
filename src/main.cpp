@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 #include "RenderWindow.h"
@@ -15,6 +16,9 @@ int main() {
 	byte element = 1; //1 - water, 2 - wood
 	RenderWindow* window = new RenderWindow(title, width, height);
 	bool running = true;
+
+	SDL_Texture** textures = new SDL_Texture*[2];
+	loadTextures(window, textures);
 
 	SDL_Event event;
 
@@ -72,4 +76,7 @@ int main() {
 		delete[] screenMatrix[i];
 	}
 	delete[] screenMatrix;
+	SDL_DestroyTexture(textures[0]);
+	SDL_DestroyTexture(textures[1]);
+	delete[] textures;
 }

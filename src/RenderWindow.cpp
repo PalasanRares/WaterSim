@@ -43,3 +43,16 @@ void RenderWindow::renderMatrix(byte** matrix, const int width, const int height
 		}
 	}
 }
+
+SDL_Texture* RenderWindow::loadImage(const char* path) {
+	SDL_Texture* texture = nullptr;
+	texture = IMG_LoadTexture(renderer, path);
+	if (texture == nullptr) {
+		cout << "Failed to load texture. Error" << SDL_GetError() << endl;
+	}
+	return texture;
+}
+
+void RenderWindow::renderTextures(SDL_Texture** textures) {
+	
+}

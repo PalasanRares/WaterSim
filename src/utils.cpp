@@ -71,3 +71,8 @@ void drawElement(byte** matrix, int brushSize, const int x, const int y, const i
 		}
 	}
 }
+
+void loadTextures(RenderWindow* window, SDL_Texture** textures) {
+	textures[0] = window->loadImage("res/Water.png");
+	textures[1] = window->loadImage("res/Wood.png");
+}

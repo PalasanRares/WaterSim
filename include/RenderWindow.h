@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <string>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 #include "types.h"
@@ -19,4 +19,6 @@ public:
 	void clear();
 	void display();
 	void renderMatrix(byte** matrix, const int width, const int height);
+	SDL_Texture* loadImage(const char* path);
+	void renderTextures(SDL_Texture** textures);
 };
