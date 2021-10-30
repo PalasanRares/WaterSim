@@ -1,8 +1,9 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <vector>
 #include <string>
 #include <iostream>
+
+#include "types.h"
 
 using namespace std;
 
@@ -17,5 +18,5 @@ public:
 
 	void clear();
 	void display();
-	void renderMatrix(vector<vector<char>>& matrix);
+	void renderMatrix(byte** matrix, const int width, const int height);
 };

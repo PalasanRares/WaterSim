@@ -1,11 +1,12 @@
 #pragma once
-#include <vector>
 #include <iostream>
+
+#include "types.h"
 
 using namespace std;
 
-void initializeMatrix(vector<vector<char>>& matrix, const int width, const int height);
+void initializeMatrix(byte** matrix, const int width, const int height);
 
-void updateMatrix(vector<vector<char>>& matrix);
+void updateMatrix(byte** matrix, const int width, const int height);
 
-void drawWater(vector<vector<char>>& matrix, int brushSize, int x, int y);
+void drawWater(byte** matrix, int brushSize, const int x, const int y, const int width, const int height);

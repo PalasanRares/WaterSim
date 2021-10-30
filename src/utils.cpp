@@ -1,44 +1,60 @@
 #include "utils.h"
 
-void initializeMatrix(vector<vector<char>>& matrix, const int width, const int height) {
+void initializeMatrix(byte** matrix, const int width, const int height) {
 	for (int i = 0; i < width; i++) {
-		vector<char> aux(height, 0);
-		matrix.push_back(aux);
+		matrix[i] = new byte[height];
+	}
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			matrix[i][j] = 0;
+		}
 	}
 }
 
-void updateMatrix(vector<vector<char>>& matrix) {
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = matrix.at(0).size() - 1; j >= 0; j--) {
-			if (matrix.at(i).at(j) == 1) {
+void updateMatrix(byte** matrix, const int width, const int height) {
+	for (int i = 0; i < width; i++) {
+		for (int j = height - 1; j >= 0; j--) {
+			if (matrix[i][j] == 1) {
 				bool movedDown = false;
-				if (j < matrix.at(0).size() - 1) {
-					if (matrix.at(i).at(j + 1) == 0) {
-						matrix.at(i).at(j + 1) = 1;
-						matrix.at(i).at(j) = 0;
+				if (j < height - 1) {
+					if (matrix[i][j + 1] == 0) {
+						matrix[i][j + 1] = 1;
+						matrix[i][j] = 0;
 						movedDown = true;
 					}
-					else if (i > 0 && matrix.at(i - 1).at(j + 1) == 0) {
-						matrix.at(i - 1).at(j + 1) = 1;
-						matrix.at(i).at(j) = 0;
+					else if (i > 0 && matrix[i - 1][j + 1] == 0) {
+						matrix[i - 1][j + 1] = 1;
+						matrix[i][j] = 0;
 						movedDown = true;
 					}
-					else if (i < matrix.size() - 1 && matrix.at(i + 1).at(j + 1) == 0) {
-						matrix.at(i + 1).at(j + 1) = 1;
-						matrix.at(i).at(j) = 0;
+					else if (i < width - 1 && matrix[i + 1][j + 1] == 0) {
+						matrix[i + 1][j + 1] = 1;
+						matrix[i][j] = 0;
 						movedDown = true;
 					}
 				}
 				if (!movedDown) {
 					if ((double)rand() / (double)RAND_MAX > 0.5) {
-						if (i > 0 && matrix.at(i - 1).at(j) == 0) {
-							matrix.at(i - 1).at(j) = 1;
-							matrix.at(i).at(j) = 0;
-						}	
+						byte speed = 4;
+						while (speed > 0) {
+							if (i > speed && matrix[i - speed][j] == 0) {
+								matrix[i - speed][j] = 1;
+								matrix[i][j] = 0;
+								speed = 1;
+							}	
+							speed -= 1;
+						}
 					}
-					else if (i < matrix.size() - 1 && matrix.at(i + 1).at(j) == 0) {
-							matrix.at(i + 1).at(j) = 1;
-							matrix.at(i).at(j) = 0;
+					else {
+						byte speed = 4;
+						while (speed > 0) {
+							if (i < width - speed && matrix[i + speed][j] == 0) {
+								matrix[i + speed][j] = 1;
+								matrix[i][j] = 0;
+								speed = 1;
+							}
+							speed -= 1;
+						}
 					}
 				}
 			}
@@ -46,11 +62,11 @@ void updateMatrix(vector<vector<char>>& matrix) {
 	}
 }
 
-void drawWater(vector<vector<char>>& matrix, int brushSize, int x, int y) {
+void drawWater(byte** matrix, int brushSize, const int x, const int y, const int width, const int height) {
 	for (int i = x - brushSize; i < x + brushSize; i++) {
 		for (int j = y - brushSize; j < y + brushSize; j++) {
-			if (i >= 0 && i < matrix.size() && j >= 0 && j < matrix.at(0).size()) {
-				matrix.at(i).at(j) = 1;
+			if (i >= 0 && i < width && j >= 0 && j < height) {
+				matrix[i][j] = 1;
 			}
 		}
 	}
