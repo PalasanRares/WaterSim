@@ -7,9 +7,10 @@
 using namespace std;
 
 int main() {
-	const char* title = "WaterSim 0.1";
-	const int width = 1000;
-	const int height = 500;
+	const char* title = "WaterSim 0.2";
+	const int width = 500;
+	const int height = 250;
+	int brushSize = 4;
 	RenderWindow* window = new RenderWindow(title, width, height);
 	bool running = true;
 
@@ -29,12 +30,13 @@ int main() {
 					running = false;
 					break;
 				case SDL_MOUSEMOTION:
-					uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
-					if (buttons & SDL_BUTTON(1)) {
-						screenMatrix.at(xMouse).at(yMouse) = 1;
-					}
 					break;
 			}
+		}
+
+		uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
+		if (buttons & SDL_BUTTON(1)) {
+			drawWater(screenMatrix, brushSize, xMouse, yMouse);
 		}
 
 		window->clear();
