@@ -20,5 +20,5 @@ public:
 	void display();
 	void renderMatrix(byte** matrix, const int width, const int height);
 	SDL_Texture* loadImage(const char* path);
-	void renderTextures(SDL_Texture** textures);
+	void renderElement(SDL_Texture* texture);
 };

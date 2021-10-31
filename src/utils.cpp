@@ -65,14 +65,16 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 void drawElement(byte** matrix, int brushSize, const int x, const int y, const int width, const int height, const byte element) {
 	for (int i = x - brushSize; i < x + brushSize; i++) {
 		for (int j = y - brushSize; j < y + brushSize; j++) {
-			if (i >= 0 && i < width && j >= 0 && j < height && matrix[i][j] == 0) {
-				matrix[i][j] = element;
+			if (i >= 0 && i < width && j >= 0 && j < height) {
+				if (matrix[i][j] == 0 || element == 0) {
+					matrix[i][j] = element;
+				}
 			}
 		}
 	}
 }
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures) {
-	textures[0] = window->loadImage("res/Water.png");
-	textures[1] = window->loadImage("res/Wood.png");
+	textures[1] = window->loadImage("res/Water.png");
+	textures[2] = window->loadImage("res/Wood.png");
 }
