@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
 	const char* title = "WaterSim 0.4";
 	const int width = 500;
 	const int height = 250;
@@ -89,4 +89,5 @@ int main() {
 	SDL_DestroyTexture(textures[0]);
 	SDL_DestroyTexture(textures[1]);
 	delete[] textures;
+	return 0;
 }
