@@ -81,9 +81,6 @@
 			]
 		]
 	},
-	"buffers":
-	[
-	],
 	"build_system": "",
 	"build_system_choices":
 	[
@@ -182,14 +179,10 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/home/lenovo/Projects/WaterSim"
-	],
 	"file_history":
 	[
-		"/home/lenovo/Projects/WaterSim/src/RenderWindow.cpp",
 		"/home/lenovo/Projects/WaterSim/WaterSim.sublime-project",
+		"/home/lenovo/Projects/WaterSim/src/RenderWindow.cpp",
 		"/home/lenovo/Projects/WaterSim/include/RenderWindow.h",
 		"/home/lenovo/Projects/WaterSim/src/utils.cpp",
 		"/home/lenovo/Projects/WaterSim/include/utils.h",
@@ -251,14 +244,6 @@
 		"whole_word": false,
 		"wrap": true
 	},
-	"groups":
-	[
-		{
-			"sheets":
-			[
-			]
-		}
-	],
 	"incremental_find":
 	{
 		"height": 40.0
@@ -266,28 +251,6 @@
 	"input":
 	{
 		"height": 40.0
-	},
-	"layout":
-	{
-		"cells":
-		[
-			[
-				0,
-				0,
-				1,
-				1
-			]
-		],
-		"cols":
-		[
-			0.0,
-			1.0
-		],
-		"rows":
-		[
-			0.0,
-			1.0
-		]
 	},
 	"menu_visible": true,
 	"output.exec":
@@ -302,8 +265,7 @@
 	{
 		"height": 132.0
 	},
-	"pinned_build_system": "Debug",
-	"project": "WaterSim.sublime-project",
+	"pinned_build_system": "Linux",
 	"replace":
 	{
 		"height": 72.0
@@ -340,7 +302,6 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
 	"settings":
 	{
 	},

@@ -17,7 +17,7 @@
 		{
 			"name": "Windows",
 			"working_dir": "${project_path}",
-			"cmd": ["x86_64-w64-mingw32-g++ -c src/*.cpp -std=c++14 -m64 -O3 -Wall -I include && x86_64-w64-mingw32-g++ *.o -o bin/Windows/main -s -lmingw32 -lSDL2main -lSDL2 -lSDL2_image"],
+			"cmd": ["x86_64-w64-mingw32-g++ -c src/*.cpp -std=c++14 -m64 -O3 -static -static-libgcc -static-libstdc++ -Wall -I include && x86_64-w64-mingw32-g++ *.o -o bin/Windows/main -s -lmingw32 -lSDL2main -lSDL2 -lSDL2_image"],
 			"selector": "source.c++",
 			"shell": true
 		}
