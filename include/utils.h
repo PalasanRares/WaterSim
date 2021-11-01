@@ -15,3 +15,5 @@ void updateMatrix(byte** matrix, const int width, const int height);
 void drawElement(byte** matrix, int brushSize, const int x, const int y, const int width, const int height, const byte element);
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures);
+
+void swap(byte** matrix, const int i, const int j, const int x, const int y);

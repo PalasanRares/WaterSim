@@ -10,15 +10,15 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	const char* title = "WaterSim 0.4";
-	const int width = 500;
-	const int height = 250;
-	int brushSize = 2;
-	byte element = 1; //0 - eraser, 1 - water, 2 - wood
-	byte elementNr = 3;
-	RenderWindow* window = new RenderWindow(title, width * 2, height * 2);
+	const int width = 250;
+	const int height = 125;
+	int brushSize = 1;
+	byte element = 1; //0 - eraser, 1 - water, 2 - wood, 3 - sand, 4 - acid
+	byte elementNr = 5;
+	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 
-	SDL_Texture** textures = new SDL_Texture*[3];
+	SDL_Texture** textures = new SDL_Texture*[elementNr];
 	loadTextures(window, textures);
 
 	SDL_Event event;
@@ -39,13 +39,13 @@ int main(int argc, char** argv) {
 				case SDL_KEYDOWN:
 					switch (event.key.keysym.sym) {
 						case SDLK_RIGHT:
-							if (brushSize < 6) {
-								brushSize += 2;
+							if (brushSize < 3) {
+								brushSize += 1;
 							}
 							break;
 						case SDLK_LEFT:
-							if (brushSize > 2) {
-								brushSize -= 2;
+							if (brushSize > 1) {
+								brushSize -= 1;
 							}
 							break;
 						case SDLK_UP:
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 
 		uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
 		if (buttons & SDL_BUTTON(1)) {
-			drawElement(screenMatrix, brushSize, xMouse / 2, yMouse / 2, width, height, element);
+			drawElement(screenMatrix, brushSize, xMouse / 4, yMouse / 4, width, height, element);
 		}
 
 		window->clear();
@@ -86,8 +86,9 @@ int main(int argc, char** argv) {
 		delete[] screenMatrix[i];
 	}
 	delete[] screenMatrix;
-	SDL_DestroyTexture(textures[0]);
-	SDL_DestroyTexture(textures[1]);
+	for (int i = 1; i < elementNr; i++) {
+		SDL_DestroyTexture(textures[i]);
+	}
 	delete[] textures;
 	return 0;
 }

@@ -17,17 +17,17 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 			if (matrix[i][j] == 1) {
 				bool movedDown = false;
 				if (j < height - 1) {
-					if (matrix[i][j + 1] == 0) {
+					if (matrix[i][j + 1] == 0 || matrix[i][j + 1] == 4) {
 						matrix[i][j + 1] = 1;
 						matrix[i][j] = 0;
 						movedDown = true;
 					}
-					else if (i > 0 && matrix[i - 1][j + 1] == 0) {
+					else if (i > 0 && (matrix[i - 1][j + 1] == 0 || matrix[i - 1][j + 1] == 4)) {
 						matrix[i - 1][j + 1] = 1;
 						matrix[i][j] = 0;
 						movedDown = true;
 					}
-					else if (i < width - 1 && matrix[i + 1][j + 1] == 0) {
+					else if (i < width - 1 && (matrix[i + 1][j + 1] == 0 || matrix[i + 1][j + 1] == 4)) {
 						matrix[i + 1][j + 1] = 1;
 						matrix[i][j] = 0;
 						movedDown = true;
@@ -58,6 +58,78 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 					}
 				}
 			}
+			else if (matrix[i][j] == 3) {
+				if (j < height - 1) {
+					if (matrix[i][j + 1] <= 1) {
+						swap(matrix, i, j, i, j + 1);
+					}
+					else if (i > 0 && matrix[i - 1][j + 1] <= 0) {
+						swap(matrix, i, j, i - 1, j + 1);
+					}
+					else if (i < width - 1 && matrix[i + 1][j + 1] <= 0) {
+						swap(matrix, i, j, i + 1, j + 1);
+					}
+				}
+			}
+			else if (matrix[i][j] == 4) {
+				double random = (double)rand() / (double)RAND_MAX;
+				bool movedDown = false;
+				if (j < height - 1) {
+					if (matrix[i][j + 1] == 0) {
+						matrix[i][j + 1] = 4;
+						matrix[i][j] = 0;
+						movedDown = true;
+					}
+					else if (i > 0 && matrix[i - 1][j + 1] == 0) {
+						matrix[i - 1][j + 1] = 4;
+						matrix[i][j] = 0;
+						movedDown = true;
+					}
+					else if (i < width - 1 && matrix[i + 1][j + 1] == 0) {
+						matrix[i + 1][j + 1] = 4;
+						matrix[i][j] = 0;
+						movedDown = true;
+					}
+				}
+				if (!movedDown) {
+					if (random > 0.5) {
+						byte speed = 4;
+						while (speed > 0) {
+							if (i > speed && matrix[i - speed][j] == 0) {
+								matrix[i - speed][j] = 4;
+								matrix[i][j] = 0;
+								speed = 1;
+							}	
+							speed -= 1;
+						}
+					}
+					else {
+						byte speed = 4;
+						while (speed > 0) {
+							if (i < width - speed && matrix[i + speed][j] == 0) {
+								matrix[i + speed][j] = 4;
+								matrix[i][j] = 0;
+								speed = 1;
+							}
+							speed -= 1;
+						}
+					}
+				}
+				if (j < height - 1 && random < 0.03) {
+					if (matrix[i][j + 1] != 0 && matrix[i][j + 1] != 4) {
+						matrix[i][j] = 0;
+						matrix[i][j + 1] = 0;
+					}
+					else if (i > 0 && matrix[i - 1][j + 1] != 0 && matrix[i - 1][j + 1] != 4) {
+						matrix[i][j] = 0;
+						matrix[i - 1][j + 1] = 0;
+					}
+					else if (i < width - 1 && matrix[i + 1][j + 1] != 0 && matrix[i + 1][j + 1] != 4) {
+						matrix[i][j] = 0;
+						matrix[i + 1][j + 1] = 0;
+					}
+				}
+			}
 		}
 	}
 }
@@ -75,6 +147,14 @@ void drawElement(byte** matrix, int brushSize, const int x, const int y, const i
 }
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures) {
-	textures[1] = window->loadImage("res/Water.png");
-	textures[2] = window->loadImage("res/Wood.png");
+	textures[1] = window->loadImage("./res/Water.png");
+	textures[2] = window->loadImage("./res/Wood.png");
+	textures[3] = window->loadImage("./res/Sand.png");
+	textures[4] = window->loadImage("./res/Acid.png");
+}
+
+void swap(byte** matrix, const int i, const int j, const int x, const int y) {
+	byte aux = matrix[i][j];
+	matrix[i][j] = matrix[x][y];
+	matrix[x][y] = aux;
 }
