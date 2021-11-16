@@ -60,7 +60,7 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 			}
 			else if (matrix[i][j] == 3) {
 				if (j < height - 1) {
-					if (matrix[i][j + 1] <= 1) {
+					if (matrix[i][j + 1] <= 1 || matrix[i][j + 1] == 4) {
 						swap(matrix, i, j, i, j + 1);
 					}
 					else if (i > 0 && matrix[i - 1][j + 1] <= 0) {
