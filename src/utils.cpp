@@ -41,7 +41,7 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 								matrix[i - speed][j] = 1;
 								matrix[i][j] = 0;
 								speed = 1;
-							}	
+							}
 							speed -= 1;
 						}
 					}
@@ -99,7 +99,7 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 								matrix[i - speed][j] = 4;
 								matrix[i][j] = 0;
 								speed = 1;
-							}	
+							}
 							speed -= 1;
 						}
 					}
