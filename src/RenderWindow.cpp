@@ -4,7 +4,7 @@ RenderWindow::RenderWindow(const char* title, int width, int height) : window(nu
 	window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		cout << "Window failed to initialize. Error" << SDL_GetError() << endl;
-	} 
+	}
 	else {
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer == nullptr) {

@@ -35,25 +35,25 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 				}
 				if (!movedDown) {
 					if ((double)rand() / (double)RAND_MAX > 0.5) {
-						byte speed = 4;
-						while (speed > 0) {
-							if (i > speed && matrix[i - speed][j] == 0) {
-								matrix[i - speed][j] = 1;
-								matrix[i][j] = 0;
-								speed = 1;
-							}
-							speed -= 1;
+						byte speed = 1;
+						while (speed < 5 && i > speed && matrix[i - speed][j] == 0) {
+							speed += 1;
+						}
+						speed -= 1;
+						if (speed > 0) {
+							matrix[i - speed][j] = 1;
+							matrix[i][j] = 0;
 						}
 					}
 					else {
-						byte speed = 4;
-						while (speed > 0) {
-							if (i < width - speed && matrix[i + speed][j] == 0) {
-								matrix[i + speed][j] = 1;
-								matrix[i][j] = 0;
-								speed = 1;
-							}
-							speed -= 1;
+						byte speed = 1;
+						while (speed < 5 && i + speed < width && matrix[i + speed][j] == 0) {
+							speed += 1;
+						}
+						speed -= 1;
+						if (speed > 0) {
+							matrix[i + speed][j] = 1;
+							matrix[i][j] = 0;
 						}
 					}
 				}
