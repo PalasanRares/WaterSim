@@ -16,3 +16,8 @@ rgb pickWood() {
 rgb pickAcid() {
   return rgb(0, rand() % 56 + 200, 0);
 }
+
+rgb pickStone() {
+  int random = rand() % 24;
+  return rgb(random + 105, random + 105, random + 105);
+}

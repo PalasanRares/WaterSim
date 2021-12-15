@@ -12,4 +12,6 @@ rgb pickWood();
 
 rgb pickAcid();
 
+rgb pickStone();
+
 #endif

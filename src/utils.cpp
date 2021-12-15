@@ -21,6 +21,9 @@ void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const 
 					case WOOD:
 						elem = new Wood();
 						break;
+					case STONE:
+						elem = new Stone();
+						break;
 			  }
 				if (matrix->getPosition(i, j)->getId() == ERASER || elem->getId() == ERASER) {
 					matrix->setPosition(i, j, elem);

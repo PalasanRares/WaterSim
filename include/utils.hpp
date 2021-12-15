@@ -12,6 +12,7 @@
 #include "elements/liquids/Acid.hpp"
 #include "elements/solids/movable/Sand.hpp"
 #include "elements/solids/immovable/Wood.hpp"
+#include "elements/solids/immovable/Stone.hpp"
 
 using namespace std;
 
