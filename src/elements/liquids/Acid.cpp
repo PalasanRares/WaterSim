@@ -46,7 +46,7 @@ bool Acid::dissolveBottom(Matrix* matrix, const int& i, const int& j) {
   return false;
 }
 
-Acid::Acid() : Liquid(ACID, 2) {};
+Acid::Acid() : Liquid(ACID, LIQUID) {};
 
 void Acid::update(Matrix* matrix, const int& i, const int& j) {
   Liquid::update(matrix, i, j);

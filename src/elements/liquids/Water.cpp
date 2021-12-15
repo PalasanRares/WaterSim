@@ -1,3 +1,3 @@
 #include "elements/liquids/Water.hpp"
 
-Water::Water() : Liquid(WATER, 1) {};
+Water::Water() : Liquid(WATER, LIQUID) {};

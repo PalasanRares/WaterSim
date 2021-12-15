@@ -62,6 +62,9 @@ void Matrix::refreshMatrix() {
 
 Matrix::~Matrix() {
   for (int i = 0; i < width; i++) {
+    for (int j = 0; j < height; j++) {
+      delete matrix[i][j];
+    }
     delete[] matrix[i];
   }
   delete[] matrix;

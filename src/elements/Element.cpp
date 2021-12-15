@@ -1,13 +1,13 @@
 #include "elements/Element.hpp"
 
-Element::Element(byte id, int color) : id(id), color(color), updated(false) {};
+Element::Element(byte id, int type) : id(id), type(type), updated(false) {};
 
 byte Element::getId() {
   return id;
 }
 
-int Element::getColor() {
-  return color;
+int Element::getType() {
+  return type;
 }
 
 bool Element::getUpdated() {
