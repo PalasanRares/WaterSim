@@ -1,6 +1,6 @@
 #include "elements/Element.hpp"
 
-Element::Element(byte id, int type) : id(id), type(type), updated(false) {};
+Element::Element(byte id, int type, rgb color) : id(id), type(type), color(color), updated(false) {};
 
 byte Element::getId() {
   return id;
@@ -12,6 +12,10 @@ int Element::getType() {
 
 bool Element::getUpdated() {
   return updated;
+}
+
+rgb Element::getColor() {
+  return color;
 }
 
 void Element::setUpdated(bool updated) {

@@ -33,28 +33,9 @@ void RenderWindow::renderMatrix(Matrix* matrix, const int width, const int heigh
 			SDL_Rect rect;
 			rect.x = i * 4; rect.y = j * 4;
 			rect.w = 4; rect.h = 4; //2,2 nice filter
-			switch(matrix->getPosition(i, j)->getId()) {
-				case WATER:
-					SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-					SDL_RenderFillRect(renderer, &rect);
-					break;
-				case ACID:
-					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-					SDL_RenderFillRect(renderer, &rect);
-					break;
-				case SAND:
-					SDL_SetRenderDrawColor(renderer, 194, 178, 128, 255);
-					SDL_RenderFillRect(renderer, &rect);
-					break;
-				case WOOD:
-					SDL_SetRenderDrawColor(renderer, 59, 42, 5, 255);
-					SDL_RenderFillRect(renderer, &rect);
-					break;
-				case ERASER:
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-					SDL_RenderFillRect(renderer, &rect);
-					break;
-			}
+			rgb color = matrix->getPosition(i, j)->getColor();
+			SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+			SDL_RenderFillRect(renderer, &rect);
 		}
 	}
 }
