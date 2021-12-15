@@ -27,28 +27,33 @@ void RenderWindow::display() {
 	SDL_RenderPresent(renderer);
 }
 
-void RenderWindow::renderMatrix(byte** matrix, const int width, const int height) {
+void RenderWindow::renderMatrix(Matrix* matrix, const int width, const int height) {
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 			SDL_Rect rect;
 			rect.x = i * 4; rect.y = j * 4;
 			rect.w = 4; rect.h = 4; //2,2 nice filter
-			switch(matrix[i][j]) {
-				case 1:
+			switch(matrix->getPosition(i, j)->getId()) {
+				case WATER:
 					SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 					SDL_RenderFillRect(renderer, &rect);
 					break;
-				case 2:
-					SDL_SetRenderDrawColor(renderer, 59, 42, 5, 255);
+				case ACID:
+					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 					SDL_RenderFillRect(renderer, &rect);
 					break;
-				case 3:
+				case SAND:
 					SDL_SetRenderDrawColor(renderer, 194, 178, 128, 255);
 					SDL_RenderFillRect(renderer, &rect);
 					break;
-				case 4:
-					SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+				case WOOD:
+					SDL_SetRenderDrawColor(renderer, 59, 42, 5, 255);
 					SDL_RenderFillRect(renderer, &rect);
+					break;
+				case ERASER:
+					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+					SDL_RenderFillRect(renderer, &rect);
+					break;
 			}
 		}
 	}

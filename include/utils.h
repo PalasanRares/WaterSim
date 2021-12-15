@@ -5,6 +5,11 @@
 
 #include "types.h"
 #include "RenderWindow.h"
+#include "Matrix.hpp"
+#include "elements/Element.hpp"
+#include "elements/Eraser.hpp"
+#include "elements/liquids/Water.hpp"
+#include "elements/liquids/Acid.hpp"
 
 using namespace std;
 
@@ -12,7 +17,7 @@ void initializeMatrix(byte** matrix, const int width, const int height);
 
 void updateMatrix(byte** matrix, const int width, const int height);
 
-void drawElement(byte** matrix, int brushSize, const int x, const int y, const int width, const int height, const byte element);
+void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const int width, const int height, byte element);
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures);
 

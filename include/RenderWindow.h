@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "types.h"
+#include "Matrix.hpp"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
 
 	void clear();
 	void display();
-	void renderMatrix(byte** matrix, const int width, const int height);
+	void renderMatrix(Matrix* matrix, const int width, const int height);
 	SDL_Texture* loadImage(const char* path);
 	void renderElement(SDL_Texture* texture);
 };

@@ -1,10 +1,18 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
+#include <climits>
 
 #include "RenderWindow.h"
+#include "elements/liquids/Water.hpp"
+#include "elements/Eraser.hpp"
+#include "elements/Element.hpp"
+#include "elements/liquids/Liquid.hpp"
+#include "elements/liquids/Acid.hpp"
+#include "Matrix.hpp"
 #include "utils.h"
 #include "types.h"
+#include "simulation.h"
 
 using namespace std;
 
@@ -13,18 +21,17 @@ int main(int argc, char** argv) {
 	const int width = 250;
 	const int height = 125;
 	int brushSize = 1;
-	byte element = 1; //0 - eraser, 1 - water, 2 - wood, 3 - sand, 4 - acid
+	byte element = 1; //0 - eraser, 1 - water, 2 - acid, 3 - sand, 4 - wood
 	byte elementNr = 5;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
+
+	Matrix* matrix = new Matrix(width, height);
 
 	SDL_Texture** textures = new SDL_Texture*[elementNr];
 	loadTextures(window, textures);
 
 	SDL_Event event;
-
-	byte** screenMatrix = new byte*[width];
-	initializeMatrix(screenMatrix, width, height);
 
 	int xMouse, yMouse;
 
@@ -66,15 +73,16 @@ int main(int argc, char** argv) {
 
 		uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
 		if (buttons & SDL_BUTTON(1)) {
-			drawElement(screenMatrix, brushSize, xMouse / 4, yMouse / 4, width, height, element);
+			drawElement(matrix, brushSize, xMouse / 4, yMouse / 4, width, height, element);
 		}
 
+		matrix->updateMatrix();
+		matrix->refreshMatrix();
+
 		window->clear();
-		window->renderMatrix(screenMatrix, width, height);
+		window->renderMatrix(matrix, width, height);
 		window->renderElement(textures[element]);
 		window->display();
-
-		updateMatrix(screenMatrix, width, height);
 
 		if ((SDL_GetTicks() - time) < 10) {
 			SDL_Delay(10);
@@ -82,13 +90,10 @@ int main(int argc, char** argv) {
 	}
 
 	delete window;
-	for (int i = 0; i < width; i++) {
-		delete[] screenMatrix[i];
-	}
-	delete[] screenMatrix;
 	for (int i = 1; i < elementNr; i++) {
 		SDL_DestroyTexture(textures[i]);
 	}
 	delete[] textures;
+	delete matrix;
 	return 0;
 }

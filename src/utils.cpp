@@ -136,12 +136,24 @@ void updateMatrix(byte** matrix, const int width, const int height) {
 	}
 }
 
-void drawElement(byte** matrix, int brushSize, const int x, const int y, const int width, const int height, const byte element) {
+void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const int width, const int height, byte element) {
 	for (int i = x - brushSize; i < x + brushSize; i++) {
 		for (int j = y - brushSize; j < y + brushSize; j++) {
 			if (i >= 0 && i < width && j >= 0 && j < height) {
-				if (matrix[i][j] == 0 || element == 0) {
-					matrix[i][j] = element;
+				Element* elem;
+				switch (element) {
+			    case 0:
+			      elem = new Eraser();
+			      break;
+			    case 1:
+			      elem = new Water();
+			      break;
+			    case 2:
+			      elem = new Acid();
+			      break;
+			  }
+				if (matrix->getPosition(i, j)->getId() == ERASER || elem->getId() == ERASER) {
+					matrix->setPosition(i, j, elem);
 				}
 			}
 		}
@@ -150,9 +162,9 @@ void drawElement(byte** matrix, int brushSize, const int x, const int y, const i
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures) {
 	textures[1] = window->loadImage("./res/Water.png");
-	textures[2] = window->loadImage("./res/Wood.png");
+	textures[2] = window->loadImage("./res/Acid.png");
 	textures[3] = window->loadImage("./res/Sand.png");
-	textures[4] = window->loadImage("./res/Acid.png");
+	textures[4] = window->loadImage("./res/Wood.png");
 }
 
 void swap(byte** matrix, const int i, const int j, const int x, const int y) {
