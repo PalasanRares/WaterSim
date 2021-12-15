@@ -2,7 +2,6 @@
 #include "elements/Eraser.hpp"
 #include "elements/liquids/Water.hpp"
 #include "elements/liquids/Acid.hpp"
-#include <iostream>
 
 Matrix::Matrix(const int width, const int height) : width(width), height(height) {
   matrix = new Element**[width];

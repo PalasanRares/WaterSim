@@ -2,7 +2,7 @@
 #define _LIQUID_HPP_
 
 #include "../Element.hpp"
-#include "types.h"
+#include "types.hpp"
 
 #include <stdlib.h>
 

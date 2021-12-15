@@ -2,7 +2,7 @@
 #define _NONE_HPP_
 
 #include "Element.hpp"
-#include "types.h"
+#include "types.hpp"
 
 using namespace std;
 

@@ -1,8 +1,7 @@
 #ifndef _MATRIX_HPP_
 #define _MATRIX_HPP_
 
-#include <climits>
-#include "types.h"
+#include "types.hpp"
 #include <iostream>
 #include "elements/Element.hpp"
 

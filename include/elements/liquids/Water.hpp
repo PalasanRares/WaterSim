@@ -1,7 +1,7 @@
 #ifndef _WATER_HPP_
 #define _WATER_HPP_
 
-#include "types.h"
+#include "types.hpp"
 #include "Liquid.hpp"
 
 using namespace std;

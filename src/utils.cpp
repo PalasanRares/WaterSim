@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "utils.hpp"
 
 void initializeMatrix(byte** matrix, const int width, const int height) {
 	for (int i = 0; i < width; i++) {

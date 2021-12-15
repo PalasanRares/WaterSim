@@ -1,18 +1,16 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
-#include <climits>
 
-#include "RenderWindow.h"
+#include "RenderWindow.hpp"
 #include "elements/liquids/Water.hpp"
 #include "elements/Eraser.hpp"
 #include "elements/Element.hpp"
 #include "elements/liquids/Liquid.hpp"
 #include "elements/liquids/Acid.hpp"
 #include "Matrix.hpp"
-#include "utils.h"
-#include "types.h"
-#include "simulation.h"
+#include "utils.hpp"
+#include "types.hpp"
 
 using namespace std;
 

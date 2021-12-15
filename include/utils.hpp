@@ -3,8 +3,8 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-#include "types.h"
-#include "RenderWindow.h"
+#include "types.hpp"
+#include "RenderWindow.hpp"
 #include "Matrix.hpp"
 #include "elements/Element.hpp"
 #include "elements/Eraser.hpp"
