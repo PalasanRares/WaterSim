@@ -15,12 +15,12 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-	const char* title = "WaterSim 0.6";
+	const char* title = "WaterSim 0.7";
 	const int width = 250;
 	const int height = 125;
 	int brushSize = 1;
 	byte element = 1;
-	byte elementNr = 6;
+	byte elementNr = 7;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 

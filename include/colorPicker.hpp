@@ -14,4 +14,6 @@ rgb pickAcid();
 
 rgb pickStone();
 
+rgb pickVapor();
+
 #endif

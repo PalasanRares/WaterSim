@@ -21,3 +21,8 @@ rgb pickStone() {
   int random = rand() % 24;
   return rgb(random + 105, random + 105, random + 105);
 }
+
+rgb pickVapor() {
+  int random = rand() % 10;
+  return rgb(random + 211, random + 211, random + 211);
+}
