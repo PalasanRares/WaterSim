@@ -26,3 +26,7 @@ rgb pickVapor() {
   int random = rand() % 10;
   return rgb(random + 211, random + 211, random + 211);
 }
+
+rgb pickGlass() {
+  return rgb(rand() % 27 + 170, 251, 255);
+}

@@ -13,6 +13,7 @@
 #include "elements/solids/movable/Sand.hpp"
 #include "elements/solids/immovable/Wood.hpp"
 #include "elements/solids/immovable/Stone.hpp"
+#include "elements/solids/immovable/Glass.hpp"
 #include "elements/gases/Vapor.hpp"
 
 using namespace std;
