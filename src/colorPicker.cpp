@@ -30,3 +30,7 @@ rgb pickVapor() {
 rgb pickGlass() {
   return rgb(rand() % 27 + 170, 251, 255);
 }
+
+rgb pickLava() {
+  return rgb(rand() % 56 + 200, 0, 0);
+}

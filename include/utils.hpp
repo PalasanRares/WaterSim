@@ -10,6 +10,7 @@
 #include "elements/Eraser.hpp"
 #include "elements/liquids/Water.hpp"
 #include "elements/liquids/Acid.hpp"
+#include "elements/liquids/Lava.hpp"
 #include "elements/solids/movable/Sand.hpp"
 #include "elements/solids/immovable/Wood.hpp"
 #include "elements/solids/immovable/Stone.hpp"

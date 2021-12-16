@@ -18,4 +18,6 @@ rgb pickVapor();
 
 rgb pickGlass();
 
+rgb pickLava();
+
 #endif

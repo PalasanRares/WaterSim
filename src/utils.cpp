@@ -30,6 +30,9 @@ void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const 
 					case GLASS:
 						elem = new Glass();
 						break;
+					case LAVA:
+						elem = new Lava();
+						break;
 			  }
 				if (matrix->getPosition(i, j)->getId() == ERASER || elem->getId() == ERASER) {
 					matrix->setPosition(i, j, elem);
@@ -47,4 +50,5 @@ void loadTextures(RenderWindow* window, SDL_Texture** textures) {
 	textures[5] = window->loadImage("./res/Stone.png");
 	textures[6] = window->loadImage("./res/Vapor.png");
 	textures[7] = window->loadImage("./res/Glass.png");
+	textures[8] = window->loadImage("./res/Lava.png");
 }

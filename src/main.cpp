@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	const int height = 125;
 	int brushSize = 1;
 	byte element = 1;
-	byte elementNr = 8;
+	byte elementNr = 9;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 
