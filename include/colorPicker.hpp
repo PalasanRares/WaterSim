@@ -20,4 +20,6 @@ rgb pickGlass();
 
 rgb pickLava();
 
+rgb pickFire();
+
 #endif

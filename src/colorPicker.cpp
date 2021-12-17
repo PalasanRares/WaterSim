@@ -34,3 +34,18 @@ rgb pickGlass() {
 rgb pickLava() {
   return rgb(rand() % 56 + 200, 0, 0);
 }
+
+rgb pickFire() {
+  int random = rand() % 3;
+  switch (random) {
+    case 0:
+      return rgb(255, 0, 0);
+      break;
+    case 1:
+      return rgb(255, 140, 0);
+      break;
+    default:
+      return rgb(255, 255, 0);
+      break;
+  }
+}

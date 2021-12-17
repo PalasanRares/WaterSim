@@ -16,6 +16,7 @@
 #include "elements/solids/immovable/Stone.hpp"
 #include "elements/solids/immovable/Glass.hpp"
 #include "elements/gases/Vapor.hpp"
+#include "elements/gases/Fire.hpp"
 
 using namespace std;
 
