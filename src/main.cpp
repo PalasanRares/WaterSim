@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
 #include <iostream>
 
 #include "RenderWindow.hpp"
@@ -28,6 +29,9 @@ int main(int argc, char** argv) {
 
 	SDL_Texture** textures = new SDL_Texture*[elementNr];
 	loadTextures(window, textures);
+
+	string* labels = new string[elementNr];
+	initLabels(labels);
 
 	SDL_Event event;
 
@@ -80,6 +84,7 @@ int main(int argc, char** argv) {
 		window->clear();
 		window->renderMatrix(matrix, width, height);
 		window->renderElement(textures[element]);
+		window->renderText(labels[element]);
 		window->display();
 
 		if ((SDL_GetTicks() - time) < 10) {
@@ -92,6 +97,7 @@ int main(int argc, char** argv) {
 		SDL_DestroyTexture(textures[i]);
 	}
 	delete[] textures;
+	delete[] labels;
 	delete matrix;
 	return 0;
 }

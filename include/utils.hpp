@@ -23,3 +23,5 @@ using namespace std;
 void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const int width, const int height, byte element);
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures);
+
+void initLabels(string* labels);

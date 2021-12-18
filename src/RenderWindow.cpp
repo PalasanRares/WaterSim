@@ -3,12 +3,19 @@
 RenderWindow::RenderWindow(const char* title, int width, int height) : window(nullptr), renderer(nullptr) {
 	window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
-		cout << "Window failed to initialize. Error" << SDL_GetError() << endl;
+		cout << "Window failed to initialize. Error " << SDL_GetError() << endl;
 	}
 	else {
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer == nullptr) {
-			cout << "Renderer failed to initialize. Error" << SDL_GetError() << endl;
+			cout << "Renderer failed to initialize. Error " << SDL_GetError() << endl;
+		}
+		else {
+			TTF_Init();
+			font = TTF_OpenFont("./fonts/pixelated.ttf", 36);
+			if (font == nullptr) {
+				cout << "Font failed to load. Error " << TTF_GetError() << endl;
+			}
 		}
 	}
 }
@@ -16,6 +23,7 @@ RenderWindow::RenderWindow(const char* title, int width, int height) : window(nu
 RenderWindow::~RenderWindow() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	TTF_CloseFont(font);
 }
 
 void RenderWindow::clear() {
@@ -57,4 +65,20 @@ void RenderWindow::renderElement(SDL_Texture* texture) {
 	destination.x = 10; destination.y = 10;
 	destination.w = 64; destination.h = 64;
 	SDL_RenderCopy(renderer, texture, &source, &destination);
+}
+
+void RenderWindow::renderText(const string text) {
+	SDL_Color color = {255, 255, 255};
+	SDL_Surface* textSurface;
+	SDL_Texture* textTexture;
+	SDL_Rect dest;
+	dest.x = 10; dest.y = 75;
+	textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
+	textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+
+	SDL_QueryTexture(textTexture, nullptr, nullptr, &dest.w, &dest.h);
+	SDL_RenderCopy(renderer, textTexture, nullptr, &dest);
+
+	SDL_FreeSurface(textSurface);
+	SDL_DestroyTexture(textTexture);
 }

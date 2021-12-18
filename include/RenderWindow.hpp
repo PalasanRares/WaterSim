@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
 
 #include "types.hpp"
 #include "Matrix.hpp"
@@ -11,6 +12,7 @@ class RenderWindow {
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	TTF_Font* font;
 
 public:
 	RenderWindow(const char* title, int width, int height);
@@ -21,4 +23,5 @@ public:
 	void renderMatrix(Matrix* matrix, const int width, const int height);
 	SDL_Texture* loadImage(const char* path);
 	void renderElement(SDL_Texture* texture);
+	void renderText(const string text);
 };

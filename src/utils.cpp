@@ -46,6 +46,7 @@ void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const 
 }
 
 void loadTextures(RenderWindow* window, SDL_Texture** textures) {
+	textures[0] = window->loadImage("./res/Eraser.png");
 	textures[1] = window->loadImage("./res/Water.png");
 	textures[2] = window->loadImage("./res/Acid.png");
 	textures[3] = window->loadImage("./res/Sand.png");
@@ -55,4 +56,17 @@ void loadTextures(RenderWindow* window, SDL_Texture** textures) {
 	textures[7] = window->loadImage("./res/Glass.png");
 	textures[8] = window->loadImage("./res/Lava.png");
 	textures[9] = window->loadImage("./res/Fire.png");
+}
+
+void initLabels(string* labels) {
+	labels[0] = "Eraser";
+	labels[1] = "Water";
+	labels[2] = "Acid";
+	labels[3] = "Sand";
+	labels[4] = "Wood";
+	labels[5] = "Stone";
+	labels[6] = "Vapor";
+	labels[7] = "Glass";
+	labels[8] = "Lava";
+	labels[9] = "Fire";
 }
