@@ -12,6 +12,7 @@
 #include "Matrix.hpp"
 #include "utils.hpp"
 #include "types.hpp"
+#include "AssetManager.hpp"
 
 using namespace std;
 
@@ -26,12 +27,6 @@ int main(int argc, char** argv) {
 	bool running = true;
 
 	Matrix* matrix = new Matrix(width, height);
-
-	SDL_Texture** textures = new SDL_Texture*[elementNr];
-	loadTextures(window, textures);
-
-	string* labels = new string[elementNr];
-	initLabels(labels);
 
 	SDL_Event event;
 
@@ -83,8 +78,10 @@ int main(int argc, char** argv) {
 
 		window->clear();
 		window->renderMatrix(matrix, width, height);
-		window->renderElement(textures[element]);
-		window->renderText(labels[element]);
+
+		AssetManager* assetManager = AssetManager::getInstance();
+		window->renderTexture(window->loadImage(assetManager>getElementIcon(element)), 10, 10, 2);
+		window->renderTexture(window->loadText(assetManager->getElementLabel(element)), 10, 75, 1);
 		window->display();
 
 		if ((SDL_GetTicks() - time) < 10) {
@@ -93,11 +90,6 @@ int main(int argc, char** argv) {
 	}
 
 	delete window;
-	for (int i = 1; i < elementNr; i++) {
-		SDL_DestroyTexture(textures[i]);
-	}
-	delete[] textures;
-	delete[] labels;
 	delete matrix;
 	return 0;
 }

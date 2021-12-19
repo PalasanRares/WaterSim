@@ -48,37 +48,35 @@ void RenderWindow::renderMatrix(Matrix* matrix, const int width, const int heigh
 	}
 }
 
-SDL_Texture* RenderWindow::loadImage(const char* path) {
+SDL_Texture* RenderWindow::loadImage(const string& path) {
 	SDL_Texture* texture = nullptr;
-	texture = IMG_LoadTexture(renderer, path);
-	if (texture == nullptr) {
-		cout << "Failed to load texture. Error" << SDL_GetError() << endl;
-	}
+	texture = IMG_LoadTexture(renderer, path.c_str());
 	return texture;
 }
 
-void RenderWindow::renderElement(SDL_Texture* texture) {
-	SDL_Rect source;
-	source.x = 0; source.y = 0;
-	source.w = 32; source.h = 32;
-	SDL_Rect destination;
-	destination.x = 10; destination.y = 10;
-	destination.w = 64; destination.h = 64;
-	SDL_RenderCopy(renderer, texture, &source, &destination);
+SDL_Texture* RenderWindow::loadText(const string& text) {
+	SDL_Texture* texture = nullptr;
+	SDL_Surface* surface = nullptr;
+	SDL_Color color = {255, 255, 255};
+
+	surface = TTF_RenderText_Solid(font, text.c_str(), color);
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+	SDL_FreeSurface(surface);
+
+	return texture;
 }
 
-void RenderWindow::renderText(const string text) {
-	SDL_Color color = {255, 255, 255};
-	SDL_Surface* textSurface;
-	SDL_Texture* textTexture;
-	SDL_Rect dest;
-	dest.x = 10; dest.y = 75;
-	textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
-	textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+void RenderWindow::renderTexture(SDL_Texture* texture, const int& x, const int& y, const int& multiplier) {
+	SDL_Rect destination;
+	destination.x = x;
+	destination.y = y;
 
-	SDL_QueryTexture(textTexture, nullptr, nullptr, &dest.w, &dest.h);
-	SDL_RenderCopy(renderer, textTexture, nullptr, &dest);
+	SDL_QueryTexture(texture, nullptr, nullptr, &destination.w, &destination.h);
 
-	SDL_FreeSurface(textSurface);
-	SDL_DestroyTexture(textTexture);
+	destination.w *= multiplier;
+	destination.h *= multiplier;
+	SDL_RenderCopy(renderer, texture, nullptr, &destination);
+
+	SDL_DestroyTexture(texture);
 }
