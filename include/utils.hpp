@@ -6,17 +6,6 @@
 #include "types.hpp"
 #include "RenderWindow.hpp"
 #include "Matrix.hpp"
-#include "elements/Element.hpp"
-#include "elements/Eraser.hpp"
-#include "elements/liquids/Water.hpp"
-#include "elements/liquids/Acid.hpp"
-#include "elements/liquids/Lava.hpp"
-#include "elements/solids/movable/Sand.hpp"
-#include "elements/solids/immovable/Wood.hpp"
-#include "elements/solids/immovable/Stone.hpp"
-#include "elements/solids/immovable/Glass.hpp"
-#include "elements/gases/Vapor.hpp"
-#include "elements/gases/Fire.hpp"
 
 using namespace std;
 

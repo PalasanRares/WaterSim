@@ -16,7 +16,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-	const char* title = "WaterSim 0.8";
+	const char* title = "WaterSim 0.9";
 	const int width = 250;
 	const int height = 125;
 	int brushSize = 1;

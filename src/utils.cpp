@@ -1,42 +1,12 @@
 #include "utils.hpp"
+#include "elements/Element.hpp"
+#include "factories/ElementFactory.hpp"
 
 void drawElement(Matrix* matrix, int brushSize, const int x, const int y, const int width, const int height, byte element) {
 	for (int i = x - brushSize; i < x + brushSize; i++) {
 		for (int j = y - brushSize; j < y + brushSize; j++) {
 			if (i >= 0 && i < width && j >= 0 && j < height) {
-				Element* elem;
-				switch (element) {
-			    case ERASER:
-			      elem = new Eraser();
-			      break;
-			    case WATER:
-			      elem = new Water();
-			      break;
-			    case ACID:
-			      elem = new Acid();
-			      break;
-					case SAND:
-						elem = new Sand();
-						break;
-					case WOOD:
-						elem = new Wood();
-						break;
-					case STONE:
-						elem = new Stone();
-						break;
-					case VAPOR:
-						elem = new Vapor();
-						break;
-					case GLASS:
-						elem = new Glass();
-						break;
-					case LAVA:
-						elem = new Lava();
-						break;
-					case FIRE:
-						elem = new Fire();
-						break;
-			  }
+				Element* elem = ElementFactory::getInstance()->createElement(element);
 				if (matrix->getPosition(i, j)->getId() == ERASER || elem->getId() == ERASER) {
 					matrix->setPosition(i, j, elem);
 				}
