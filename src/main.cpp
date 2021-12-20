@@ -10,27 +10,33 @@
 #include "elements/liquids/Liquid.hpp"
 #include "elements/liquids/Acid.hpp"
 #include "Matrix.hpp"
-#include "utils.hpp"
 #include "types.hpp"
 #include "AssetManager.hpp"
+#include "Drawer.hpp"
 
 using namespace std;
 
 int main(int argc, char** argv) {
-	const char* title = "WaterSim 0.9";
+	const char* title = "WaterSim 0.10";
 	const int width = 250;
 	const int height = 125;
-	int brushSize = 1;
 	byte element = 1;
 	byte elementNr = 10;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 
+	SDL_ShowCursor(SDL_DISABLE);
+
 	Matrix* matrix = new Matrix(width, height);
+	Drawer* drawer = new Drawer(3);
 
 	SDL_Event event;
 
 	int xMouse, yMouse;
+
+	int brushSize = drawer->getBrushSize();
+
+	AssetManager* assetManager = AssetManager::getInstance();
 
 	while (running) {
 		uint32_t time = SDL_GetTicks();
@@ -43,14 +49,12 @@ int main(int argc, char** argv) {
 				case SDL_KEYDOWN:
 					switch (event.key.keysym.sym) {
 						case SDLK_RIGHT:
-							if (brushSize < 3) {
-								brushSize += 1;
-							}
+							drawer->modifyBrushSize(1);
+							brushSize = drawer->getBrushSize();
 							break;
 						case SDLK_LEFT:
-							if (brushSize > 1) {
-								brushSize -= 1;
-							}
+							drawer->modifyBrushSize(-1);
+							brushSize = drawer->getBrushSize();
 							break;
 						case SDLK_UP:
 							element = (element + 1) % elementNr;
@@ -70,8 +74,11 @@ int main(int argc, char** argv) {
 
 		uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
 		if (buttons & SDL_BUTTON(1)) {
-			drawElement(matrix, brushSize, xMouse / 4, yMouse / 4, width, height, element);
+			drawer->drawElement(matrix, xMouse / 4, yMouse / 4, element);
 		}
+
+		int cursorOffsetX = xMouse - (brushSize + 3) * 3;
+		int cursorOffsetY = yMouse - (brushSize + 3) * 3;
 
 		matrix->updateMatrix();
 		matrix->refreshMatrix();
@@ -79,9 +86,16 @@ int main(int argc, char** argv) {
 		window->clear();
 		window->renderMatrix(matrix, width, height);
 
-		AssetManager* assetManager = AssetManager::getInstance();
-		window->renderTexture(window->loadImage(assetManager>getElementIcon(element)), 10, 10, 2);
-		window->renderTexture(window->loadText(assetManager->getElementLabel(element)), 10, 75, 1);
+		SDL_Texture* elementIcon = window->loadImage(assetManager->getElementIcon(element));
+		SDL_Texture* elementLabel = window->loadText(assetManager->getElementLabel(element));
+		SDL_Texture* cursor = window->loadImage(assetManager->getCursor(brushSize));
+		window->renderTexture(elementIcon, 10, 10, 2);
+		window->renderTexture(elementLabel, 10, 75, 1);
+		window->renderTexture(cursor, cursorOffsetX, cursorOffsetY, 4);
+		SDL_DestroyTexture(elementIcon);
+		SDL_DestroyTexture(elementLabel);
+		SDL_DestroyTexture(cursor);
+
 		window->display();
 
 		if ((SDL_GetTicks() - time) < 10) {

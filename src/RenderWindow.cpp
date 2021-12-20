@@ -77,6 +77,4 @@ void RenderWindow::renderTexture(SDL_Texture* texture, const int& x, const int& 
 	destination.w *= multiplier;
 	destination.h *= multiplier;
 	SDL_RenderCopy(renderer, texture, nullptr, &destination);
-
-	SDL_DestroyTexture(texture);
 }

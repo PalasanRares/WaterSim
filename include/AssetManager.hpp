@@ -14,17 +14,20 @@ private:
 
   void loadElementIcons();
   void loadElementLabels();
+  void loadCursors();
 
   static AssetManager* instance;
 
   map<int, string> elementIcons;
   map<int, string> elementLabels;
+  map<int, string> cursors;
 
 public:
   static AssetManager* getInstance();
 
-  string getElementIcon(const int& element);
-  string getElementLabel(const int& element);
+  const string& getElementIcon(const int& element);
+  const string& getElementLabel(const int& element);
+  const string& getCursor(const int& brushSize);
 
 };
 

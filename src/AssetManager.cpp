@@ -5,6 +5,7 @@
 AssetManager::AssetManager() {
   loadElementIcons();
   loadElementLabels();
+  loadCursors();
 }
 
 void AssetManager::loadElementIcons() {
@@ -33,6 +34,12 @@ void AssetManager::loadElementLabels() {
   elementLabels[WOOD] = "Wood";
 }
 
+void AssetManager::loadCursors() {
+  cursors[1] = "./res/Cursor1.png";
+  cursors[2] = "./res/Cursor2.png";
+  cursors[3] = "./res/Cursor3.png";
+}
+
 AssetManager* AssetManager::instance = nullptr;
 
 AssetManager* AssetManager::getInstance() {
@@ -42,10 +49,14 @@ AssetManager* AssetManager::getInstance() {
   return instance;
 }
 
-string AssetManager::getElementIcon(const int& element) {
+const string& AssetManager::getElementIcon(const int& element) {
   return elementIcons[element];
 }
 
-string AssetManager::getElementLabel(const int& element) {
+const string& AssetManager::getElementLabel(const int& element) {
   return elementLabels[element];
+}
+
+const string& AssetManager::getCursor(const int& brushSize) {
+  return cursors[brushSize];
 }
