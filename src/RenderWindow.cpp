@@ -1,12 +1,12 @@
 #include "RenderWindow.hpp"
 
 RenderWindow::RenderWindow(const char* title, int width, int height) : window(nullptr), renderer(nullptr) {
-	window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(title, width, height, 0);
 	if (window == nullptr) {
 		cout << "Window failed to initialize. Error " << SDL_GetError() << endl;
 	}
 	else {
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		renderer = SDL_CreateRenderer(window, nullptr, SDL_RENDERER_ACCELERATED);
 		if (renderer == nullptr) {
 			cout << "Renderer failed to initialize. Error " << SDL_GetError() << endl;
 		}
@@ -38,7 +38,7 @@ void RenderWindow::display() {
 void RenderWindow::renderMatrix(Matrix* matrix, const int width, const int height) {
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
-			SDL_Rect rect;
+			SDL_FRect rect;
 			rect.x = i * 4; rect.y = j * 4;
 			rect.w = 4; rect.h = 4; //2,2 nice filter
 			rgb color = matrix->getPosition(i, j)->getColor();
@@ -62,19 +62,21 @@ SDL_Texture* RenderWindow::loadText(const string& text) {
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-	SDL_FreeSurface(surface);
+	SDL_DestroySurface(surface);
 
 	return texture;
 }
 
 void RenderWindow::renderTexture(SDL_Texture* texture, const int& x, const int& y, const int& multiplier) {
-	SDL_Rect destination;
+	SDL_FRect destination;
 	destination.x = x;
 	destination.y = y;
 
-	SDL_QueryTexture(texture, nullptr, nullptr, &destination.w, &destination.h);
+	int textureWidth, textureHeight;
 
-	destination.w *= multiplier;
-	destination.h *= multiplier;
-	SDL_RenderCopy(renderer, texture, nullptr, &destination);
+	SDL_QueryTexture(texture, nullptr, nullptr, &textureWidth, &textureHeight);
+
+	destination.w = multiplier * textureWidth;
+	destination.h = multiplier * textureHeight;
+	SDL_RenderTexture(renderer, texture, nullptr, &destination);
 }

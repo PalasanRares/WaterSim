@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 
 #set the project name and version
 project(WaterSim VERSION 0.4)
@@ -9,12 +9,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include(FindPkgConfig)
 
-pkg_search_module(SDL2 REQUIRED sdl2)
-pkg_search_module(SDL2IMAGE REQUIRED SDL2_image >= 2.0.0)
-pkg_search_module(SDL2TTF REQUIRED SDL2_ttf >= 2.0.0)
+find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
+find_package(SDL3_image REQUIRED CONFIG REQUIRED COMPONENTS SDL3_image-shared)
+find_package(SDL3_ttf REQUIRED CONFIG REQUIRED COMPONENTS SDL3_ttf-shared)
 
-file(GLOB_RECURSE SRC CONFIGURE_DEPENDS "include/*.h" "src/*.cpp")
-add_executable(WaterSim ${SRC})
+add_executable(WaterSim main.cpp)
 
-target_include_directories(WaterSim PRIVATE include src ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS})
-target_link_libraries(WaterSim ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})
+add_subdirectory(src)
+add_subdirectory(include)
+
+target_link_libraries(WaterSim PRIVATE SDL3::SDL3 SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf)

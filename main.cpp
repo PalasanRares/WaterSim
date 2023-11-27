@@ -1,14 +1,16 @@
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
+#include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
+
 #include <iostream>
 
 #include "RenderWindow.hpp"
-#include "elements/liquids/Water.hpp"
-#include "elements/Eraser.hpp"
-#include "elements/Element.hpp"
-#include "elements/liquids/Liquid.hpp"
-#include "elements/liquids/Acid.hpp"
+#include "Water.hpp"
+#include "Eraser.hpp"
+#include "Element.hpp"
+#include "Liquid.hpp"
+#include "Acid.hpp"
 #include "Matrix.hpp"
 #include "types.hpp"
 #include "AssetManager.hpp"
@@ -25,14 +27,14 @@ int main(int argc, char** argv) {
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 
-	SDL_ShowCursor(SDL_DISABLE);
+	SDL_HideCursor();
 
 	Matrix* matrix = new Matrix(width, height);
 	Drawer* drawer = new Drawer(3);
 
 	SDL_Event event;
 
-	int xMouse, yMouse;
+	float xMouse, yMouse;
 
 	int brushSize = drawer->getBrushSize();
 
@@ -43,10 +45,10 @@ int main(int argc, char** argv) {
 
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
-				case SDL_QUIT:
+				case SDL_EVENT_QUIT:
 					running = false;
 					break;
-				case SDL_KEYDOWN:
+				case SDL_EVENT_KEY_DOWN:
 					switch (event.key.keysym.sym) {
 						case SDLK_RIGHT:
 							drawer->modifyBrushSize(1);
@@ -72,7 +74,7 @@ int main(int argc, char** argv) {
 			}
 		}
 
-		uint32_t buttons = SDL_GetMouseState(&xMouse, &yMouse);
+		Uint32 buttons = SDL_GetMouseState(&xMouse, &yMouse);
 		if (buttons & SDL_BUTTON(1)) {
 			drawer->drawElement(matrix, xMouse / 4, yMouse / 4, element);
 		}
