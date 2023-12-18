@@ -49,3 +49,18 @@ rgb pickFire() {
       break;
   }
 }
+
+rgb pickIron() {
+  int random = rand() % 3;
+  switch(random) {
+    case 0:
+      return rgb(100, 100, 100);
+      break;
+    case 1:
+      return rgb(200, 200, 200);
+      break;
+    default:
+      return rgb(255, 255, 255);
+      break;
+  }
+}

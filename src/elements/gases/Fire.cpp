@@ -2,6 +2,7 @@
 #include "Matrix.hpp"
 #include "colorPicker.hpp"
 #include "elements/Eraser.hpp"
+#include "Iron.hpp"
 
 void Fire::disappear(Matrix* matrix, const int& i, const int& j) {
   if (rand() % 100 < 5) {
@@ -14,6 +15,12 @@ void Fire::setWoodOnFire(Matrix* matrix, const int& i, const int& j) {
     if (checkTop(matrix, i, j) || checkLeft(matrix, i, j) || checkRight(matrix, i, j) || checkBottom(matrix, i, j)) {
       return;
     }
+  }
+}
+
+void Fire::heatUpIron(Matrix* matrix, const int& i, const int& j) {
+  if (matrix->checkPosition(i, j - 1) && matrix->getPosition(i, j - 1)->getId() == IRON) {
+    ((Iron*) matrix->getPosition(i, j - 1))->heatUp();
   }
 }
 
@@ -54,5 +61,6 @@ Fire::Fire() : Gas(FIRE, GAS, pickFire()) {}
 void Fire::update(Matrix* matrix, const int& i, const int& j) {
   Gas::update(matrix, i, j);
   setWoodOnFire(matrix, i, j);
+  heatUpIron(matrix, i, j);
   disappear(matrix, i, j);
 }

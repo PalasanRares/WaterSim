@@ -10,6 +10,7 @@
 #include "elements/solids/immovable/Glass.hpp"
 #include "elements/gases/Vapor.hpp"
 #include "elements/gases/Fire.hpp"
+#include "Iron.hpp"
 
 ElementFactory* ElementFactory::instance = nullptr;
 
@@ -51,6 +52,9 @@ Element* ElementFactory::createElement(const int& elementId) {
       break;
     case FIRE:
       return new Fire();
+      break;
+    case IRON:
+      return new Iron();
       break;
   }
   return nullptr;

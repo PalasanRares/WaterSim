@@ -4,4 +4,5 @@ target_sources(WaterSim
         ImmovableSolid.cpp
         Stone.cpp
         Wood.cpp
+        Iron.cpp
 )

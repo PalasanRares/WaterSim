@@ -8,6 +8,7 @@ private:
   void disappear(Matrix* matrix, const int& i, const int& j);
 
   void setWoodOnFire(Matrix* matrix, const int& i, const int& j);
+  void heatUpIron(Matrix* matrix, const int& i, const int& j);
 
   bool checkTop(Matrix* matrix, const int& i, const int& j);
   bool checkLeft(Matrix* matrix, const int& i, const int& j);

@@ -1,5 +1,9 @@
 #include "RenderWindow.hpp"
 
+#include <algorithm>
+
+#include "Iron.hpp"
+
 RenderWindow::RenderWindow(const char* title, int width, int height) : window(nullptr), renderer(nullptr) {
 	window = SDL_CreateWindow(title, width, height, 0);
 	if (window == nullptr) {
@@ -41,7 +45,13 @@ void RenderWindow::renderMatrix(Matrix* matrix, const int width, const int heigh
 			SDL_FRect rect;
 			rect.x = i * 4; rect.y = j * 4;
 			rect.w = 4; rect.h = 4; //2,2 nice filter
-			rgb color = matrix->getPosition(i, j)->getColor();
+			Element* element = matrix->getPosition(i, j);
+			rgb color = element->getColor();
+			if (element->getId() == IRON) {
+				color.r = min(255.f, color.r + (255 * ((Iron*) element)->getHeatLevel()));
+				color.g = max(0.f, color.g - (255 * ((Iron*) element)->getHeatLevel()));
+				color.b = max(0.f, color.b - (255 * ((Iron*) element)->getHeatLevel()));
+			}
 			SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
 			SDL_RenderFillRect(renderer, &rect);
 		}

@@ -22,4 +22,6 @@ rgb pickLava();
 
 rgb pickFire();
 
+rgb pickIron();
+
 #endif

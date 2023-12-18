@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 	const int width = 250;
 	const int height = 125;
 	byte element = 1;
-	byte elementNr = 10;
+	byte elementNr = 11;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 
