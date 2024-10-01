@@ -2,9 +2,7 @@
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
 name: CMake release
 
-on:
-  push:
-    branches: [ "main" ]
+on: workflow_dispatch
 
 jobs:
   build:
@@ -23,9 +21,6 @@ jobs:
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
-        exclude:
-          - os: ubuntu-latest
-            c_compiler: cl
 
     steps:
       - name: "Checkout repository"
@@ -61,8 +56,6 @@ jobs:
           cmake -S . -B build && cmake --build build && sudo cmake --install build
   
       - name: Configure CMake
-        # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-        # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
         run: >
           cmake -B ${{ steps.strings.outputs.build-output-dir }}
           -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
@@ -71,11 +64,15 @@ jobs:
           -S ${{ github.workspace }}
   
       - name: Build
-        # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
         run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+      - name: Archive
+        run: |
+          cd ${{ github.workspace }}
+          zip -r release_archive build/WaterSim res
   
-      - name: Test
-        working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-        # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-        run: ctest --build-config ${{ matrix.build_type }}
+      - name: Publish
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifact
+          path: ${{ github.workspace }}/release_archive
