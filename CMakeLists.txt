@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 #set the project name and version
-project(WaterSim VERSION 0.4)
+project(WaterSim VERSION 0.10)
 
 #specify c++ standard
 set(CMAKE_CXX_STANDARD 14)
