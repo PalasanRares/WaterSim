@@ -4,3 +4,4 @@ bin
 *.sublime-workspace
 build
 **/.DS_Store
+.vscode

@@ -24,7 +24,7 @@ bool Gas::goUpSide(Matrix* matrix, const int& i, const int& j) {
 }
 
 bool Gas::goSideways(Matrix* matrix, const int& i, const int& j) {
-  byte speed = 1;
+  watersim::byte speed = 1;
   if (rand() % 100 < 50) {
     while (speed < 10 && matrix->checkPosition(i - speed, j) && matrix->getPosition(i - speed, j)->getId() == ERASER) {
       speed += 1;

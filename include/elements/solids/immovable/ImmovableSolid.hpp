@@ -10,7 +10,7 @@ using namespace std;
 
 class ImmovableSolid : public Element {
 public:
-  ImmovableSolid(byte id, int type, rgb color) : Element(id, type, color) {};
+  ImmovableSolid(watersim::byte id, int type, rgb color) : Element(id, type, color) {};
 
   void update(Matrix* matrix, const int& i, const int& j);
 

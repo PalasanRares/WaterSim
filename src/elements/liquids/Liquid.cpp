@@ -26,7 +26,7 @@ bool Liquid::goDownSide(Matrix* matrix, const int& i, const int& j) {
 }
 
 bool Liquid::goSideways(Matrix* matrix, const int& i, const int& j) {
-  byte speed = 1;
+  watersim::byte speed = 1;
   if (rand() % 100 < 50) {
     while (speed < 5 && matrix->checkPosition(i - speed, j) && matrix->getPosition(i - speed, j)->getId() == ERASER) {
       speed += 1;

@@ -16,14 +16,18 @@
 #include "AssetManager.hpp"
 #include "Drawer.hpp"
 
+#define MAX_TICK_SPEED 120
+#define MIN_TICK_SPEED 30
+
 using namespace std;
 
 int main(int argc, char** argv) {
 	const char* title = "WaterSim 0.10";
 	const int width = 250;
 	const int height = 125;
-	byte element = 1;
-	byte elementNr = 11;
+	int tickSpeed = 60;
+	watersim::byte element = 1;
+	watersim::byte elementNr = 11;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 
@@ -40,8 +44,19 @@ int main(int argc, char** argv) {
 
 	AssetManager* assetManager = AssetManager::getInstance();
 
+	uint32_t lastTime = SDL_GetTicks();
+	uint32_t lastTick = SDL_GetTicks();
+	int noFrames = 0;
+
 	while (running) {
-		uint32_t time = SDL_GetTicks();
+
+		uint32_t currentTime = SDL_GetTicks();
+		noFrames += 1;
+		if (currentTime - lastTime >= 1000) {
+			std::cout << 1000.0f / noFrames << " ms/frame" << std::endl;
+			noFrames = 0;
+			lastTime += 1000;
+		}
 
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
@@ -69,6 +84,12 @@ int main(int argc, char** argv) {
 								element = (element - 1) % elementNr;
 							}
 							break;
+						case SDLK_u:
+							tickSpeed += tickSpeed + 30 <= MAX_TICK_SPEED ? 30 : 0;
+							break;
+						case SDLK_j:
+							tickSpeed -= tickSpeed - 30 >= MIN_TICK_SPEED ? 30 : 0;
+							break;
 					}
 					break;
 			}
@@ -82,8 +103,13 @@ int main(int argc, char** argv) {
 		int cursorOffsetX = xMouse - (brushSize + 3) * 3;
 		int cursorOffsetY = yMouse - (brushSize + 3) * 3;
 
-		matrix->updateMatrix();
-		matrix->refreshMatrix();
+		uint32_t currentTick = SDL_GetTicks();
+		
+		if (currentTick - lastTick >= 1000.0f / tickSpeed) {
+			matrix->updateMatrix();
+			matrix->refreshMatrix();
+			lastTick = currentTick;
+		}
 
 		window->clear();
 		window->renderMatrix(matrix, width, height);
@@ -91,18 +117,16 @@ int main(int argc, char** argv) {
 		SDL_Texture* elementIcon = window->loadImage(assetManager->getElementIcon(element));
 		SDL_Texture* elementLabel = window->loadText(assetManager->getElementLabel(element));
 		SDL_Texture* cursor = window->loadImage(assetManager->getCursor(brushSize));
+		SDL_Texture* tickSpeedLabel = window->loadText("Ticks: " + std::to_string(tickSpeed));
 		window->renderTexture(elementIcon, 10, 10, 2);
 		window->renderTexture(elementLabel, 10, 75, 1);
 		window->renderTexture(cursor, cursorOffsetX, cursorOffsetY, 4);
+		window->renderTexture(tickSpeedLabel, 845, 10, 1);
 		SDL_DestroyTexture(elementIcon);
 		SDL_DestroyTexture(elementLabel);
 		SDL_DestroyTexture(cursor);
 
 		window->display();
-
-		if ((SDL_GetTicks() - time) < 10) {
-			SDL_Delay(10);
-		}
 	}
 
 	delete window;

@@ -10,7 +10,7 @@ private:
   bool goSideways(Matrix* matrix, const int& i, const int& j);
 
 public:
-  Gas(byte id, int type, rgb color) : Element(id, type, color) {};
+  Gas(watersim::byte id, int type, rgb color) : Element(id, type, color) {};
 
   void update(Matrix* matrix, const int& i, const int& j);
 

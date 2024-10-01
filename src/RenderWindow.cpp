@@ -89,4 +89,5 @@ void RenderWindow::renderTexture(SDL_Texture* texture, const int& x, const int& 
 	destination.w = multiplier * textureWidth;
 	destination.h = multiplier * textureHeight;
 	SDL_RenderTexture(renderer, texture, nullptr, &destination);
+	SDL_DestroyTexture(texture);
 }

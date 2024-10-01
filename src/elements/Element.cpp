@@ -1,8 +1,8 @@
 #include "elements/Element.hpp"
 
-Element::Element(byte id, int type, rgb color) : id(id), type(type), color(color), updated(false) {};
+Element::Element(watersim::byte id, int type, rgb color) : id(id), type(type), color(color), updated(false) {};
 
-byte Element::getId() {
+watersim::byte Element::getId() {
   return id;
 }
 

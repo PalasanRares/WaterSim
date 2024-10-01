@@ -15,7 +15,7 @@ private:
   bool goSideways(Matrix* matrix, const int& i, const int& j);
 
 public:
-  Liquid(byte id, int type, rgb color) : Element(id, type, color) {};
+  Liquid(watersim::byte id, int type, rgb color) : Element(id, type, color) {};
 
   void update(Matrix* matrix, const int& i, const int& j);
 
