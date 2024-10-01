@@ -75,4 +75,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-artifact
-          path: ${{ github.workspace }}/release_archive
+          path: ${{ github.workspace }}/release_archive.zip
