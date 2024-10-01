@@ -61,6 +61,7 @@ jobs:
       shell: bash
       run: |
         cd ${{ steps.strings.outputs.sdl-dir }}
+        ls -la .
         cmake -S . -B build && cmake --install build
 
     - name: Configure CMake
