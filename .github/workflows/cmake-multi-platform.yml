@@ -60,7 +60,7 @@ jobs:
     - name: Compile and install SDL
       shell: bash
       run: |
-        cd ${{ steps.string.outputs.sdl-dir }}
+        cd ${{ steps.strings.outputs.sdl-dir }}
         cmake -S . -B build && cmake --install build
 
     - name: Configure CMake
