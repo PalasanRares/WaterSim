@@ -57,7 +57,6 @@ jobs:
       - name: Compile and install SDL_ttf
         shell: bash
         run: |
-          echo ${{ steps.strings.outputs.sdl-ttf-dir }}
           cd ${{ steps.strings.outputs.sdl-ttf-dir }}
           cmake -S . -B build && cmake --build build && sudo cmake --install build
   

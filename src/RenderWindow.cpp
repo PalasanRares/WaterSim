@@ -10,7 +10,7 @@ RenderWindow::RenderWindow(const char* title, int width, int height) : window(nu
 		cout << "Window failed to initialize. Error " << SDL_GetError() << endl;
 	}
 	else {
-		renderer = SDL_CreateRenderer(window, nullptr, SDL_RENDERER_ACCELERATED);
+		renderer = SDL_CreateRenderer(window, nullptr);
 		if (renderer == nullptr) {
 			cout << "Renderer failed to initialize. Error " << SDL_GetError() << endl;
 		}
@@ -18,7 +18,7 @@ RenderWindow::RenderWindow(const char* title, int width, int height) : window(nu
 			TTF_Init();
 			font = TTF_OpenFont("./fonts/pixelated.ttf", 36);
 			if (font == nullptr) {
-				cout << "Font failed to load. Error " << TTF_GetError() << endl;
+				cout << "Font failed to load. Error " << SDL_GetError() << endl;
 			}
 		}
 	}
@@ -69,7 +69,7 @@ SDL_Texture* RenderWindow::loadText(const string& text) {
 	SDL_Surface* surface = nullptr;
 	SDL_Color color = {255, 255, 255};
 
-	surface = TTF_RenderText_Solid(font, text.c_str(), color);
+	surface = TTF_RenderText_Blended(font, text.c_str(), text.size(), color);
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	SDL_DestroySurface(surface);
@@ -82,9 +82,9 @@ void RenderWindow::renderTexture(SDL_Texture* texture, const int& x, const int& 
 	destination.x = x;
 	destination.y = y;
 
-	int textureWidth, textureHeight;
+	float textureWidth, textureHeight;
 
-	SDL_QueryTexture(texture, nullptr, nullptr, &textureWidth, &textureHeight);
+	SDL_GetTextureSize(texture, &textureWidth, &textureHeight);
 
 	destination.w = multiplier * textureWidth;
 	destination.h = multiplier * textureHeight;

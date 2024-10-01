@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 					running = false;
 					break;
 				case SDL_EVENT_KEY_DOWN:
-					switch (event.key.keysym.sym) {
+					switch (event.key.key) {
 						case SDLK_RIGHT:
 							drawer->modifyBrushSize(1);
 							brushSize = drawer->getBrushSize();
@@ -84,10 +84,10 @@ int main(int argc, char** argv) {
 								element = (element - 1) % elementNr;
 							}
 							break;
-						case SDLK_u:
+						case SDLK_U:
 							tickSpeed += tickSpeed + 30 <= MAX_TICK_SPEED ? 30 : 0;
 							break;
-						case SDLK_j:
+						case SDLK_J:
 							tickSpeed -= tickSpeed - 30 >= MIN_TICK_SPEED ? 30 : 0;
 							break;
 					}
