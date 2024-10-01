@@ -39,9 +39,8 @@ jobs:
         run: |
           echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
           echo "sdl-dir=${{ github.workspace }}/libs/SDL" >> "$GITHUB_OUTPUT"
-          echo "sdl-image-dir"=${{ github.workspace }}/libs/SDL_image" >> "$GITHUB_OUTPUT"
           echo "sdl-ttf-dir"=${{ github.workspace }}/libs/SDL_ttf" >> "$GITHUB_OUTPUT"
-          echo $GITHUB_OUTPUT
+          echo "sdl-image-dir"=${{ github.workspace }}/libs/SDL_image" >> "$GITHUB_OUTPUT"
   
       - name: Compile and install SDL
         shell: bash
