@@ -1,11 +1,9 @@
 # This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
-name: CMake on multiple platforms
+name: CMake release
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -43,6 +41,7 @@ jobs:
           echo "sdl-dir=${{ github.workspace }}/libs/SDL" >> "$GITHUB_OUTPUT"
           echo "sdl-image-dir"=${{ github.workspace }}/libs/SDL_image" >> "$GITHUB_OUTPUT"
           echo "sdl-ttf-dir"=${{ github.workspace }}/libs/SDL_ttf" >> "$GITHUB_OUTPUT"
+          echo $GITHUB_OUTPUT
   
       - name: Compile and install SDL
         shell: bash
