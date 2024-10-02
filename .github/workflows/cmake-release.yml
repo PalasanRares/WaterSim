@@ -69,7 +69,9 @@ jobs:
       - name: Archive
         run: |
           cd ${{ github.workspace }}
-          zip -r -j release_archive build/WaterSim res
+          zip -r release_archive res
+          cd build
+          zip ../release_archive WaterSim
   
       - name: Publish
         uses: actions/upload-artifact@v4
