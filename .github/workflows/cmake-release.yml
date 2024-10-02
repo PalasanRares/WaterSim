@@ -69,10 +69,10 @@ jobs:
       - name: Archive
         run: |
           cd ${{ github.workspace }}
-          zip -r release_archive build/WaterSim res
+          zip -r -j release_archive build/WaterSim res
   
       - name: Publish
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifact
+          name: release-artifact-${{ matrix.c_compiler }}
           path: ${{ github.workspace }}/release_archive.zip
