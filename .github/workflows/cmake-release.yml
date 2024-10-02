@@ -82,5 +82,5 @@ jobs:
       - name: Publish
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifact-${{ matrix.c_compiler }}
+          name: release-artifact-${{ matrix.os }}-${{ matrix.c_compiler }}
           path: ${{ github.workspace }}/release_archive.zip
