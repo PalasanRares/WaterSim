@@ -23,7 +23,9 @@ public:
   watersim::byte getId();
   int getType();
   bool getUpdated();
+
   rgb getColor();
+  void setColor(rgb color);
 
   void setUpdated(bool updated);
 };

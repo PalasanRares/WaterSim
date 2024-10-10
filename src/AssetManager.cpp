@@ -20,6 +20,7 @@ void AssetManager::loadElementIcons() {
   elementIcons[VAPOR] = "./res/Vapor.png";
   elementIcons[WOOD] = "./res/Wood.png";
   elementIcons[IRON] = "./res/Iron.png";
+  elementIcons[DIRT] = "./res/Dirt.png";
 }
 
 void AssetManager::loadElementLabels() {
@@ -34,6 +35,7 @@ void AssetManager::loadElementLabels() {
   elementLabels[VAPOR] = "Vapor";
   elementLabels[WOOD] = "Wood";
   elementLabels[IRON] = "Iron";
+  elementLabels[DIRT] = "Dirt";
 }
 
 void AssetManager::loadCursors() {

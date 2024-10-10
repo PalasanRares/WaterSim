@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 	const int height = 125;
 	int tickSpeed = 60;
 	watersim::byte element = 1;
-	watersim::byte elementNr = 11;
+	watersim::byte elementNr = 12;
 	RenderWindow* window = new RenderWindow(title, width * 4, height * 4);
 	bool running = true;
 

@@ -1,16 +1,17 @@
 #include "factories/ElementFactory.hpp"
 
-#include "elements/Eraser.hpp"
-#include "elements/liquids/Water.hpp"
-#include "elements/liquids/Acid.hpp"
-#include "elements/liquids/Lava.hpp"
-#include "elements/solids/movable/Sand.hpp"
-#include "elements/solids/immovable/Wood.hpp"
-#include "elements/solids/immovable/Stone.hpp"
-#include "elements/solids/immovable/Glass.hpp"
-#include "elements/gases/Vapor.hpp"
-#include "elements/gases/Fire.hpp"
+#include "Eraser.hpp"
+#include "Water.hpp"
+#include "Acid.hpp"
+#include "Lava.hpp"
+#include "Sand.hpp"
+#include "Wood.hpp"
+#include "Stone.hpp"
+#include "Glass.hpp"
+#include "Vapor.hpp"
+#include "Fire.hpp"
 #include "Iron.hpp"
+#include "Dirt.hpp"
 
 ElementFactory* ElementFactory::instance = nullptr;
 
@@ -55,6 +56,9 @@ Element* ElementFactory::createElement(const int& elementId) {
       break;
     case IRON:
       return new Iron();
+      break;
+    case DIRT:
+      return new Dirt();
       break;
   }
   return nullptr;

@@ -18,6 +18,10 @@ rgb Element::getColor() {
   return color;
 }
 
+void Element::setColor(rgb color) {
+  this->color = color;
+}
+
 void Element::setUpdated(bool updated) {
   this->updated = updated;
 }

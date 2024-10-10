@@ -6,8 +6,10 @@
 
 class MovableSolid : public Element {
 private:
-  bool goDown(Matrix* matrix, const int& i, const int& j);
   bool goDownSide(Matrix* matrix, const int& i, const int& j);
+
+protected:
+  bool goDown(Matrix* matrix, const int& i, const int& j);
 
 public:
   MovableSolid(watersim::byte id, int type, rgb color) : Element(id, type, color) {};

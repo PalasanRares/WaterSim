@@ -64,3 +64,12 @@ rgb pickIron() {
       break;
   }
 }
+
+rgb pickDirt() {
+  int random = rand() % 10;
+  return rgb(196 + random, 164 + random, 132 + random);
+}
+
+rgb pickWetDirt() {
+  return rgb(123, 63, 0);
+}

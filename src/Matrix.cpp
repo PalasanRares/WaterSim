@@ -29,8 +29,23 @@ Element* Matrix::getPosition(const int& i, const int& j) {
   return matrix[i][j];
 }
 
+Element* Matrix::getPositionSafe(const int& i, const int& j) {
+  return (i >= 0 && i < width && j >= 0 && j < height) ? matrix[i][j] : nullptr;
+}
+
 bool Matrix::checkPosition(const int& i, const int& j) {
   return i >= 0 && i < width && j >= 0 && j < height;
+}
+
+bool Matrix::checkAroundForElement(const int& i, const int& j, const watersim::byte& elementId) {
+  Element* up = this->getPositionSafe(i - 1, j);
+  Element* right = this->getPositionSafe(i, j + 1);
+  Element* down = this->getPositionSafe(i + 1, j);
+  Element* left = this->getPositionSafe(i, j - 1);
+  return (up != nullptr && up->getId() == elementId) || 
+    (right != nullptr && right->getId() == elementId) || 
+    (down != nullptr && down->getId() == elementId) || 
+    (left != nullptr && left->getId() == elementId);
 }
 
 void Matrix::setPosition(const int& i, const int& j, Element* element) {

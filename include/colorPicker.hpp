@@ -24,4 +24,8 @@ rgb pickFire();
 
 rgb pickIron();
 
+rgb pickDirt();
+
+rgb pickWetDirt();
+
 #endif

@@ -3,7 +3,7 @@
 
 #include "types.hpp"
 #include <iostream>
-#include "elements/Element.hpp"
+#include "Element.hpp"
 
 using namespace std;
 
@@ -21,7 +21,9 @@ public:
   const int getHeight();
 
   Element* getPosition(const int& i, const int& j);
+  Element* getPositionSafe(const int& i, const int& j);
   bool checkPosition(const int& i, const int& j);
+  bool checkAroundForElement(const int& i, const int& j, const watersim::byte& elementId);
   void setPosition(const int& i, const int& j, Element* element);
   void swapPosition(const int& i, const int& j, const int& ii, const int& jj);
   void updateMatrix();
