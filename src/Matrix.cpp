@@ -1,76 +1,95 @@
 #include "Matrix.hpp"
-#include "elements/Eraser.hpp"
-#include "elements/liquids/Water.hpp"
-#include "elements/liquids/Acid.hpp"
+
+#include "Eraser.hpp"
 
 Matrix::Matrix(const int width, const int height) : width(width), height(height) {
-  matrix = new Element**[width];
+  matrix = vector<vector<Element>>(width);
   for (int i = 0; i < width; i++) {
-    matrix[i] = new Element*[height];
+    matrix.at(i) = vector<Element>(height);
     for (int j = 0; j < height; j++) {
-      matrix[i][j] = new Eraser();
+      matrix.at(i).at(j) = Eraser();
     }
   }
 }
 
-Element*** Matrix::getMatrix() {
+const vector<vector<Element>>& Matrix::getMatrix() {
   return matrix;
 }
 
-const int Matrix::getWidth() {
+const int& Matrix::getWidth() {
   return width;
 }
 
-const int Matrix::getHeight() {
+const int& Matrix::getHeight() {
   return height;
 }
 
-Element* Matrix::getPosition(const int& i, const int& j) {
-  return matrix[i][j];
+const Element& Matrix::getPosition(const int& i, const int& j) {
+  return matrix.at(i).at(j);
 }
 
-Element* Matrix::getPositionSafe(const int& i, const int& j) {
-  return (i >= 0 && i < width && j >= 0 && j < height) ? matrix[i][j] : nullptr;
+bool Matrix::checkAroundForElement(const int& i, const int& j, const int& elementId) {
+  try {
+    const Element& up = matrix.at(i - 1).at(j);
+    if (up.getId() == elementId) return true;
+  } catch (out_of_range exception) {
+    /* no-op */
+  }
+
+  try {
+    const Element& right = matrix.at(i).at(j + 1);
+    if (right.getId() == elementId) return true;
+  } catch (out_of_range exception) {
+    /* no-op */
+  }
+
+  try {
+    const Element& down = matrix.at(i + 1).at(j);
+		if (down.getId() == elementId) return true;
+  } catch (out_of_range exception) {
+		/* no-op */
+  }
+
+	try {
+		const Element& left = matrix.at(i).at(j - 1);
+		if (left.getId() == elementId) return true;
+	} catch (out_of_range exception) {
+		/* no-op */
+	}
+
+	return false;
 }
 
-bool Matrix::checkPosition(const int& i, const int& j) {
-  return i >= 0 && i < width && j >= 0 && j < height;
-}
-
-bool Matrix::checkAroundForElement(const int& i, const int& j, const watersim::byte& elementId) {
-  Element* up = this->getPositionSafe(i - 1, j);
-  Element* right = this->getPositionSafe(i, j + 1);
-  Element* down = this->getPositionSafe(i + 1, j);
-  Element* left = this->getPositionSafe(i, j - 1);
-  return (up != nullptr && up->getId() == elementId) || 
-    (right != nullptr && right->getId() == elementId) || 
-    (down != nullptr && down->getId() == elementId) || 
-    (left != nullptr && left->getId() == elementId);
-}
-
-void Matrix::setPosition(const int& i, const int& j, Element* element) {
-  delete matrix[i][j];
-  matrix[i][j] = element;
+void Matrix::setPosition(const int& i, const int& j, const Element& element) {
+  try {
+		matrix.at(i).at(j) = element;
+	} catch (out_of_range exception) {
+		/* no-op */
+	}
 }
 
 void Matrix::swapPosition(const int& i, const int& j, const int& ii, const int& jj) {
-  Element* aux = matrix[i][j];
-  matrix[i][j] = matrix[ii][jj];
-  matrix[ii][jj] = aux;
+	try {
+		const Element& aux = matrix.at(i).at(j);
+		matrix.at(i).at(j) = matrix.at(ii).at(jj);
+		matrix.at(ii).at(jj) = aux;
+	} catch (out_of_range exception) {
+		/* no-op */
+	}
 }
 
-void Matrix::updateMatrix() {
+void Matrix::updateElements() {
   for (int i = 0; i < width; i++) {
     for (int j = height - 1; j >= 0; j--) {
-      matrix[i][j]->update(this, i, j);
+      getPosition(i, j).update(this, i, j);
     }
   }
 }
 
-void Matrix::refreshMatrix() {
+void Matrix::refreshElements() {
   for (int i = 0; i < width; i++) {
     for (int j = height - 1; j >= 0; j--) {
-      matrix[i][j]->setUpdated(false);
+      getPosition(i, j).setUpdated(false);
     }
   }
 }

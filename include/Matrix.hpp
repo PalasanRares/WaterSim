@@ -1,33 +1,35 @@
-#ifndef _MATRIX_HPP_
-#define _MATRIX_HPP_
+#ifndef __MATRIX_HPP__
+#define __MATRIX_HPP__
+
+#include <iostream>
+#include <vector>
 
 #include "types.hpp"
-#include <iostream>
 #include "Element.hpp"
 
 using namespace std;
 
 class Matrix {
 private:
-  Element*** matrix;
+  vector<vector<Element>> matrix;
   int width;
   int height;
 
 public:
   Matrix(const int width, const int height);
 
-  Element*** getMatrix();
-  const int getWidth();
-  const int getHeight();
+  const vector<vector<Element>>& getMatrix();
+  const int& getWidth();
+  const int& getHeight();
 
-  Element* getPosition(const int& i, const int& j);
-  Element* getPositionSafe(const int& i, const int& j);
-  bool checkPosition(const int& i, const int& j);
-  bool checkAroundForElement(const int& i, const int& j, const watersim::byte& elementId);
-  void setPosition(const int& i, const int& j, Element* element);
+  const Element& getPosition(const int& i, const int& j);
+  void setPosition(const int& i, const int& j, const Element& element);
+
+  bool checkAroundForElement(const int& i, const int& j, const int& elementId);
   void swapPosition(const int& i, const int& j, const int& ii, const int& jj);
-  void updateMatrix();
-  void refreshMatrix();
+
+  void updateElements();
+  void refreshElements();
 
   ~Matrix();
 

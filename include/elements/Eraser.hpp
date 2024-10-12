@@ -10,7 +10,7 @@ class Eraser : public Element {
 public:
   Eraser();
 
-  void update(Matrix* matrix, const int& i, const int& j);
+  void update(Matrix* matrix, const int& i, const int& j) const;
 
 };
 

@@ -10,21 +10,21 @@ class Matrix;
 
 class Element {
 private:
-  watersim::byte id;
+  int id;
   int type;
   bool updated;
   rgb color;
 
 public:
-  Element(watersim::byte id, int type, rgb color);
+  Element(int id, int type, rgb color);
 
-  virtual void update(Matrix* matrix, const int& i, const int& j) = 0;
+  virtual void update(Matrix* matrix, const int& i, const int& j) const = 0;
 
-  watersim::byte getId();
-  int getType();
-  bool getUpdated();
+  int getId() const;
+  int getType() const;
+  bool getUpdated() const;
 
-  rgb getColor();
+  rgb getColor() const;
   void setColor(rgb color);
 
   void setUpdated(bool updated);

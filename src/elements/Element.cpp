@@ -1,8 +1,8 @@
 #include "elements/Element.hpp"
 
-Element::Element(watersim::byte id, int type, rgb color) : id(id), type(type), color(color), updated(false) {};
+Element::Element(int id, int type, rgb color) : id(id), type(type), color(color), updated(false) {};
 
-watersim::byte Element::getId() {
+int Element::getId() const {
   return id;
 }
 
@@ -22,6 +22,6 @@ void Element::setColor(rgb color) {
   this->color = color;
 }
 
-void Element::setUpdated(bool updated) {
+void Element::setUpdated(bool updated) const {
   this->updated = updated;
 }
