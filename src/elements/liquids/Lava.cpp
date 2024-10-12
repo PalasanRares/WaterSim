@@ -1,9 +1,11 @@
-#include "elements/liquids/Lava.hpp"
+#include "Lava.hpp"
+
 #include "Matrix.hpp"
-#include "elements/gases/Vapor.hpp"
-#include "elements/solids/immovable/Glass.hpp"
-#include "elements/solids/immovable/Stone.hpp"
-#include "elements/Eraser.hpp"
+#include "Vapor.hpp"
+#include "Glass.hpp"
+#include "Stone.hpp"
+#include "Eraser.hpp"
+#include "ElementManager.hpp"
 
 void Lava::meltStone(Matrix* matrix, const int& i, const int& j) {
   if (rand() % 100 < 10) {

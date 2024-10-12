@@ -1,7 +1,7 @@
 #include "Drawer.hpp"
 #include "Matrix.hpp"
 #include "elements/Element.hpp"
-#include "factories/ElementFactory.hpp"
+#include "ElementManager.hpp"
 
 #include <iostream>
 
@@ -15,7 +15,7 @@ void Drawer::drawElement(Matrix* matrix, const int& x, const int& y, const int& 
   for (int i = x - brushSize; i <= x + brushSize; i++) {
 		for (int j = y - brushSize; j <= y + brushSize; j++) {
       if ((((i - x) * (i - x) + (j - y) * (j - y)) <= brushSize * brushSize) && (matrix->checkPosition(i, j))) {
-        Element* elem = ElementFactory::getInstance()->createElement(element);
+        Element* elem = ElementManager::getInstance()->createElement(element);
         if (matrix->getPosition(i, j)->getId() == ERASER || elem->getId() == ERASER) {
 					matrix->setPosition(i, j, elem);
 				}

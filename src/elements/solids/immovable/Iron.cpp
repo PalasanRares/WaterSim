@@ -1,6 +1,7 @@
 #include "Iron.hpp"
 
 #include "Matrix.hpp"
+#include "ElementManager.hpp"
 
 void Iron::heatUpOtherIronUp(Matrix* matrix, const int& i, const int& j) {
     if (matrix->checkPosition(i, j - 1) && matrix->getPosition(i, j - 1)->getId() == IRON) {

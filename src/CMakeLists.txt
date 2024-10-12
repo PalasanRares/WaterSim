@@ -8,4 +8,4 @@ target_sources(WaterSim
 )
 
 add_subdirectory(elements)
-add_subdirectory(factories)
+add_subdirectory(managers)

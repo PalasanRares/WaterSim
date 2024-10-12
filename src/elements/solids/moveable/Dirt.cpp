@@ -1,6 +1,7 @@
 #include "Dirt.hpp"
 
 #include "Matrix.hpp"
+#include "ElementManager.hpp"
 
 Dirt::Dirt() : MovableSolid(DIRT, MOVABLE_SOLID, pickDirt()), wet(false) {}
 

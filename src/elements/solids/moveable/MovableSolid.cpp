@@ -1,5 +1,7 @@
-#include "elements/solids/movable/MovableSolid.hpp"
+#include "MovableSolid.hpp"
+
 #include "Matrix.hpp"
+#include "ElementManager.hpp"
 
 bool MovableSolid::goDown(Matrix* matrix, const int& i, const int& j) {
   if (matrix->checkPosition(i, j + 1) && (matrix->getPosition(i, j + 1)->getId() == ERASER || matrix->getPosition(i, j + 1)->getType() == LIQUID)) {

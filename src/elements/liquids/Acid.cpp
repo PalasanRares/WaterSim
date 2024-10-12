@@ -1,6 +1,8 @@
-#include "elements/liquids/Acid.hpp"
-#include "elements/Eraser.hpp"
+#include "Acid.hpp"
+
+#include "Eraser.hpp"
 #include "Matrix.hpp"
+#include "ElementManager.hpp"
 
 void Acid::dissolve(Matrix* matrix, const int& i, const int& j) {
   if (rand() % 100 < 20) {

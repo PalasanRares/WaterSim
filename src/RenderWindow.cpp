@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "ElementManager.hpp"
 #include "Iron.hpp"
 
 RenderWindow::RenderWindow(const char* title, int width, int height) : window(nullptr), renderer(nullptr) {

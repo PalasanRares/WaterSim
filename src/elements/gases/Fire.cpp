@@ -3,6 +3,7 @@
 #include "colorPicker.hpp"
 #include "elements/Eraser.hpp"
 #include "Iron.hpp"
+#include "ElementManager.hpp"
 
 void Fire::disappear(Matrix* matrix, const int& i, const int& j) {
   if (rand() % 100 < 5) {

@@ -1,6 +1,8 @@
-#include "elements/solids/immovable/Stone.hpp"
+#include "Stone.hpp"
+
 #include "Matrix.hpp"
-#include "elements/Eraser.hpp"
+#include "Eraser.hpp"
+#include "ElementManager.hpp"
 
 void Stone::erodate(Matrix* matrix, const int& i, const int& j) {
   if (rand() % 100 < 1) {

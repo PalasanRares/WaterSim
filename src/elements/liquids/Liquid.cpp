@@ -1,5 +1,7 @@
-#include "elements/liquids/Liquid.hpp"
+#include "Liquid.hpp"
+
 #include "Matrix.hpp"
+#include "ElementManager.hpp"
 
 bool Liquid::goDown(Matrix* matrix, const int& i, const int& j) {
   if (matrix->checkPosition(i, j + 1) && matrix->getPosition(i, j + 1)->getId() == ERASER) {

@@ -1,6 +1,7 @@
 #include "AssetManager.hpp"
 
 #include "types.hpp"
+#include "ElementManager.hpp"
 
 AssetManager::AssetManager() {
   loadElementIcons();

@@ -1,4 +1,4 @@
-#include "factories/ElementFactory.hpp"
+#include "ElementManager.hpp"
 
 #include "Eraser.hpp"
 #include "Water.hpp"
@@ -13,16 +13,16 @@
 #include "Iron.hpp"
 #include "Dirt.hpp"
 
-ElementFactory* ElementFactory::instance = nullptr;
+ElementManager* ElementManager::instance = nullptr;
 
-ElementFactory* ElementFactory::getInstance() {
+ElementManager* ElementManager::getInstance() {
   if (instance == nullptr) {
-    instance = new ElementFactory();
+    instance = new ElementManager();
   }
   return instance;
 }
 
-Element* ElementFactory::createElement(const int& elementId) {
+Element* ElementManager::createElement(const int& elementId) {
   switch (elementId) {
     case ERASER:
       return new Eraser();

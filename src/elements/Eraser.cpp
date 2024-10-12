@@ -1,4 +1,6 @@
-#include "elements/Eraser.hpp"
+#include "Eraser.hpp"
+
+#include "ElementManager.hpp"
 
 Eraser::Eraser() : Element(ERASER, 0, rgb(0, 0, 0)) {};
 

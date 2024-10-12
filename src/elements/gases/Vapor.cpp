@@ -1,7 +1,9 @@
-#include "elements/gases/Vapor.hpp"
+#include "Vapor.hpp"
+
 #include "colorPicker.hpp"
 #include "Matrix.hpp"
-#include "elements/liquids/Water.hpp"
+#include "Water.hpp"
+#include "ElementManager.hpp"
 
 void Vapor::condensate(Matrix* matrix, const int& i, const int& j) {
   if (rand() % 10000 < 1) {

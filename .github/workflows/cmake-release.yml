@@ -18,15 +18,14 @@ jobs:
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-          - os: ubuntu-latest
-            c_compiler: clang
-            cpp_compiler: clang++
           - os: macos-latest
             c_compiler: clang
             cpp_compiler: clang++
         exclude:
           - os: macos-latest
             c_compiler: gcc
+          - os: ubuntu-latest
+            c_compiler: clang
 
     steps:
       - name: "Checkout repository"
@@ -75,7 +74,7 @@ jobs:
       - name: Archive
         run: |
           cd ${{ github.workspace }}
-          zip -r release_archive res
+          zip -r release_archive res fonts
           cd build
           zip ../release_archive WaterSim
   
