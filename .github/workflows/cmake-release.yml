@@ -2,7 +2,12 @@
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
 name: CMake release
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      something:
+        description: "Blabla\n\nnewline"
+
 
 jobs:
   build:
